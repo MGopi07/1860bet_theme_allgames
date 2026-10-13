@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { shop } from "../../constants/machine";
 
+import { api } from "../../services/api";
+
 export const NotAuthorized: React.FC = () => {
   const navigate = useNavigate();
 
@@ -10,12 +12,15 @@ export const NotAuthorized: React.FC = () => {
 
   const handleClearAndRegister = () => {
     // Clear local storage machine binding
+    localStorage.removeItem("winbet_machine_id");
+    localStorage.removeItem("winbet_numeric_id");
     localStorage.removeItem("winbet_machine_name");
     localStorage.removeItem("winbet_machine_type");
     localStorage.removeItem("winbet_setup_code");
     localStorage.removeItem("winbet_registration_token");
     localStorage.removeItem("winbet_shop_name");
     localStorage.removeItem("winbet_shop_location");
+    api.generateNewDeviceFingerprint();
 
     // Navigate to registration screen
     navigate("/register");

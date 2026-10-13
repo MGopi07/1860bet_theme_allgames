@@ -8,10 +8,12 @@ import { GamePlayPage } from "../pages/SmartPC/GamePlayPage";
 import { NotAuthorized } from "../pages/NotAuthorized/NotAuthorized";
 
 export const AppRoutes: React.FC = () => {
+  const hasRegisteredMachine = Boolean(localStorage.getItem("winbet_machine_id"));
+
   return (
     <Routes>
-      {/* Root redirect */}
-      <Route path="/" element={<Navigate to="/register" replace />} />
+      {/* Root redirect: Go directly to Smart PC Lobby if already registered, else go to register */}
+      <Route path="/" element={<Navigate to={hasRegisteredMachine ? "/smart-pc" : "/register"} replace />} />
 
       {/* Smart PC Registration & Login Flow */}
       <Route path="/register" element={<Registration defaultMachineType="smart-pc" />} />

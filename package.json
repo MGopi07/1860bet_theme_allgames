@@ -1,11 +1,11 @@
 {
-  "name": "winbet-frontend",
+  "name": "betwise-smartpc",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "bash -c 'for n in \"$HOME/.nvm/versions/node/v22.23.3/bin\" \"$HOME/.nvm/versions/node/v20.20.2/bin\" \"$HOME/.nvm/versions/node/v24.11.1/bin\"; do [ -d \"$n\" ] && export PATH=\"$n:$PATH\" && break; done; tsc -b && vite build'",
     "lint": "oxlint",
     "preview": "vite preview",
     "tauri": "tauri",

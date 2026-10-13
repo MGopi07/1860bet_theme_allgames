@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useMachine } from "./useMachine";
 import { ThemeNotificationModal } from "../components/common/ThemeNotificationModal";
+import { api } from "../services/api";
 
 interface KeyboardLockContextType {
   isLocked: boolean;
@@ -38,6 +39,7 @@ export const KeyboardLockProvider: React.FC<{ children: React.ReactNode }> = ({ 
         localStorage.removeItem("winbet_numeric_id");
         localStorage.removeItem("winbet_setup_code");
         localStorage.removeItem("winbet_registration_token");
+        api.generateNewDeviceFingerprint();
         window.location.href = "/register";
       }
     };
