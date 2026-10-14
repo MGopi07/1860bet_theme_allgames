@@ -9,8 +9,13 @@ export const RegistrationSuccess: React.FC = () => {
   const machineType = (localStorage.getItem("winbet_machine_type") as MachineType) || "smart-pc";
   const machineName =
     localStorage.getItem("winbet_machine_name") ||
-    (machineType === "terminal" ? "Terminal-02" : "Smart PC-03");
-  const setupCode = localStorage.getItem("winbet_setup_code") || VALID_SETUP_CODE;
+    localStorage.getItem("winbet_machine_id") ||
+    "";
+  const shopName = localStorage.getItem("winbet_shop_name") || "";
+  const setupCode =
+    localStorage.getItem("winbet_setup_code") ||
+    localStorage.getItem("winbet_registration_token") ||
+    VALID_SETUP_CODE;
 
   const handleContinue = () => {
     if (machineType === "terminal") {
@@ -108,7 +113,7 @@ export const RegistrationSuccess: React.FC = () => {
                     </div>
                     <div className="receipt-row">
                       <span className="receipt-label">Shop Name:</span>
-                      <span className="receipt-value">{shop.name}</span>
+                      <span className="receipt-value">{shopName}</span>
                     </div>
                     <div className="receipt-row">
                       <span className="receipt-label">Location:</span>

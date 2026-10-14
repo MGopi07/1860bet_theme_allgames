@@ -27,13 +27,6 @@ export const GamingHeader: React.FC<GamingHeaderProps> = ({
     setSoundEnabled((prev) => !prev);
   };
 
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {});
-    } else if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  };
 
 
   return (
@@ -42,9 +35,9 @@ export const GamingHeader: React.FC<GamingHeaderProps> = ({
         {/* Left: Winbet Brand Logo + Machine Station Badge */}
         <div className="d-flex align-items-center gap-3">
           <Link
-            to="/register"
+            to={machineType === "terminal" ? "/terminal" : "/smart-pc"}
             className="d-flex align-items-center gap-2 text-decoration-none me-1"
-            title="Betwise Central"
+            title="Betwise Station"
           >
             {/* <img
               src="/assets/images/logo.png"
@@ -126,15 +119,6 @@ export const GamingHeader: React.FC<GamingHeaderProps> = ({
             <i className={`fa-solid ${soundEnabled ? "fa-volume-high" : "fa-volume-xmark"}`}></i>
           </button>
 
-          {/* Fullscreen Mode */}
-          <button
-            type="button"
-            className="btn-icon-control"
-            onClick={toggleFullscreen}
-            title="Fullscreen Mode"
-          >
-            <i className="fa-solid fa-expand"></i>
-          </button>
         </div>
       </div>
     </header>

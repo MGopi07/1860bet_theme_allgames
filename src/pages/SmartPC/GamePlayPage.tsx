@@ -483,15 +483,6 @@ export const GamePlayPage: React.FC = () => {
             >
               <i className="fa-solid fa-expand"></i>
             </button>
-
-            {/* Exit to Registration */}
-            <Link
-              to="/register"
-              className="btn-icon-control text-decoration-none"
-              title="Registration Portal"
-            >
-              <i className="fa-solid fa-arrow-right-from-bracket"></i>
-            </Link>
           </div>
         </div>
       </header>

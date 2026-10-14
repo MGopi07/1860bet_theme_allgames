@@ -26,7 +26,7 @@ export const GamingLayout: React.FC<GamingLayoutProps> = ({
   machineType,
   machineName,
   shopName,
-  shopLocation,
+  shopLocation: _shopLocation,
   balance,
   actionText,
   onPrimaryAction,
@@ -73,7 +73,7 @@ export const GamingLayout: React.FC<GamingLayoutProps> = ({
       <footer className="smart-pc-dock">
         <div className="container-fluid d-flex flex-wrap justify-content-between align-items-center gap-3">
           {/* Bottom Left: Shop Location */}
-          <ShopLocation shopName={shopName} location={shopLocation} />
+          <ShopLocation shopName={shopName} />
 
           {/* Middle: Quick Bet Presets */}
           {/* <div className="d-none d-lg-flex align-items-center gap-2">
@@ -127,11 +127,11 @@ export const GamingLayout: React.FC<GamingLayoutProps> = ({
                     <span style={{ color: "#ffffff" }}>WISE</span>
                   </span>
                   <span className="badge bg-dark border border-warning-subtle text-warning" style={{ fontSize: "0.7rem" }}>
-                    OFFICIAL STATION
+                    OFFICIAL MACHINE
                   </span>
                 </div>
                 <p className="text-dim small mb-3">
-                  Authorized Gaming Terminal and Smart PC system. Powered by Betwise Gaming Central.
+                  Authorized Gaming Smart PC System. Powered by Betwise Gaming Central.
                 </p>
                 <div className="security-badge-row">
                   <span className="ssl-badge">
@@ -145,8 +145,7 @@ export const GamingLayout: React.FC<GamingLayoutProps> = ({
                 <h4 className="footer-col-title">Quick Information</h4>
                 <ul className="footer-links-list">
                   <li><span className="text-dim">Shop: {shopName}</span></li>
-                  <li><span className="text-dim">Station: {machineName}</span></li>
-                  <li><span className="text-dim">Mode: {machineType === "terminal" ? "Terminal (Ticket)" : "Smart PC (Cashier)"}</span></li>
+                  <li><span className="text-dim">Machine: {machineName}</span></li>
                 </ul>
               </div>
 
@@ -154,7 +153,6 @@ export const GamingLayout: React.FC<GamingLayoutProps> = ({
                 <h4 className="footer-col-title">Player Assistance</h4>
                 <ul className="footer-links-list">
                   <li><span className="text-dim">Ask shop cashier for assistance</span></li>
-                  <li><span className="text-dim">Always keep your cashout vouchers safe</span></li>
                   <li><span className="text-dim">Play responsibly (18+ only)</span></li>
                 </ul>
               </div>

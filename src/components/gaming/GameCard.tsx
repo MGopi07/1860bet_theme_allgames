@@ -48,7 +48,7 @@ const getSecondaryFallback = (game: GameItem): string => {
   return "/assets/games/placeholder.png";
 };
 
-export const GameCard: React.FC<GameCardProps> = ({ game, onPlay, hideTitleAndSubtitle }) => {
+const GameCardComponent: React.FC<GameCardProps> = ({ game, onPlay, hideTitleAndSubtitle }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const providerName = game.provider || "Live Game";
 
@@ -125,25 +125,41 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onPlay, hideTitleAndSu
     }
   }, [fallbackStage, game, currentSrc]);
 
+  const rafRef = useRef<number | null>(null);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const maxTilt = 6;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
 
-    const rotateX = -((y - centerY) / centerY) * maxTilt;
-    const rotateY = ((x - centerX) / centerX) * maxTilt;
+    if (rafRef.current !== null) return;
 
-    cardRef.current.style.transform = `perspective(800px) rotateX(${rotateX.toFixed(1)}deg) rotateY(${rotateY.toFixed(1)}deg) translateY(-4px)`;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const maxTilt = 6;
+
+      const rotateX = -((y - centerY) / centerY) * maxTilt;
+      const rotateY = ((x - centerX) / centerX) * maxTilt;
+
+      cardRef.current.style.transform = `perspective(800px) rotateX(${rotateX.toFixed(1)}deg) rotateY(${rotateY.toFixed(1)}deg) translateY(-4px)`;
+    });
   };
 
   const handleMouseLeave = () => {
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
     if (!cardRef.current) return;
     cardRef.current.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0)";
   };
+
 
   // Determine dynamic action button text
   const getActionText = () => {
@@ -264,3 +280,6 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onPlay, hideTitleAndSu
     </div>
   );
 };
+
+export const GameCard = React.memo(GameCardComponent);
+

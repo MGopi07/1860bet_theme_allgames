@@ -95,8 +95,9 @@ const RANDOM_GAMES = [
   { name: "Trader", img: "/assets/games/SPRIBE/TRADER.png" },
 ];
 
-export const LiveWinnersTicker: React.FC = () => {
+export const LiveWinnersTicker: React.FC = React.memo(() => {
   const [winners, setWinners] = useState<WinnerItem[]>(INITIAL_WINNERS);
+
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -210,4 +211,5 @@ export const LiveWinnersTicker: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+

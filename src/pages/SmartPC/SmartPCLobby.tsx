@@ -28,6 +28,7 @@ export const SmartPCLobby: React.FC = () => {
     localStorage.removeItem("winbet_machine_id");
     localStorage.removeItem("winbet_numeric_id");
     localStorage.removeItem("winbet_setup_code");
+    localStorage.removeItem("winbet_registration_token");
     localStorage.removeItem("winbet_machine_name");
     navigate("/register");
   }, [navigate]);

@@ -1,8 +1,8 @@
 [package]
-name = "winbet-smart-pc"
-version = "1.0.0"
-description = "WinBet Smart PC Gaming Terminal"
-authors = ["WinBet Gaming Central"]
+name = "betwise-smartpc"
+version = "1.0.2"
+description = "Betwise Smart PC Gaming Terminal"
+authors = ["Betwise Gaming Central"]
 license = "Proprietary"
 repository = ""
 edition = "2024"
@@ -21,3 +21,11 @@ serde = { version = "1.0", features = ["derive"] }
 log = "0.4"
 tauri = { version = "2.12.1", features = [] }
 tauri-plugin-log = "2"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+

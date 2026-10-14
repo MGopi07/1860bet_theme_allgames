@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "winbet-smart-pc",
-  "version": "1.0.1",
-  "identifier": "com.winbet.smartpc",
+  "productName": "betwise-smartpc",
+  "version": "1.0.2",
+  "identifier": "com.betwise.smartpc",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:5173",
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "WinBet Smart PC",
+        "title": "Betwise Smart PC",
         "width": 1920,
         "height": 1080,
         "minWidth": 1024,
@@ -30,8 +30,8 @@
   "bundle": {
     "active": true,
     "targets": ["deb", "nsis"],
-    "shortDescription": "WinBet Smart PC Gaming Terminal",
-    "longDescription": "WinBet Smart PC Dedicated Gaming Terminal and Kiosk Application",
+    "shortDescription": "Betwise Smart PC Gaming Terminal",
+    "longDescription": "Betwise Smart PC Dedicated Gaming Terminal and Kiosk Application",
     "category": "Game",
     "icon": [
       "icons/32x32.png",
@@ -46,12 +46,16 @@
           "libwebkit2gtk-4.1-0 | libwebkit2gtk-4.0-37",
           "libgtk-3-0",
           "libsoup-3.0-0 | libsoup2.4-1"
-        ]
+        ],
+        "preInstallScript": "scripts/deb-preinstall.sh",
+        "postInstallScript": "scripts/deb-postinstall.sh",
+        "postRemoveScript": "scripts/deb-postremove.sh"
       }
     },
     "windows": {
       "nsis": {
-        "installMode": "both"
+        "installMode": "both",
+        "installerHooks": "installer_hooks.nsh"
       }
     }
   }

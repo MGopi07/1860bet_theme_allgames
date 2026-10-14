@@ -5,7 +5,7 @@ interface VipPromotionsSectionProps {
   onOpenCashout?: () => void;
 }
 
-export const VipPromotionsSection: React.FC<VipPromotionsSectionProps> = ({
+export const VipPromotionsSection: React.FC<VipPromotionsSectionProps> = React.memo(({
   onClaimPromo,
   onOpenCashout,
 }) => {
@@ -130,4 +130,5 @@ export const VipPromotionsSection: React.FC<VipPromotionsSectionProps> = ({
       </div>
     </section>
   );
-};
+});
+

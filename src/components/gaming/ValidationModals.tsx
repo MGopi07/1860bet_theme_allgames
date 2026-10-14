@@ -623,21 +623,6 @@ export const ValidationModals: React.FC<ValidationModalProps> = ({
             ========================================================================= */}
         {alertType === "STATION_UNBOUND" && (
           <div className="py-2">
-            {/* Top Status Pill with Emerald Glow */}
-            <div
-              className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3"
-              style={{
-                background: "rgba(16, 185, 129, 0.15)",
-                border: "1px solid rgba(52, 211, 153, 0.4)",
-                boxShadow: "0 0 16px rgba(16, 185, 129, 0.25)",
-              }}
-            >
-              <span className="spinner-grow spinner-grow-sm text-success" style={{ width: "8px", height: "8px" }} role="status"></span>
-              <span className="fw-bold text-success" style={{ fontSize: "0.78rem", letterSpacing: "0.7px", textTransform: "uppercase" }}>
-                Station Lock · Contact Cashier
-              </span>
-            </div>
-
             {/* Glowing 3D Emerald Lock Emblem */}
             <div className="d-flex justify-content-center mb-3">
               <div
@@ -676,24 +661,10 @@ export const ValidationModals: React.FC<ValidationModalProps> = ({
               PC Not Authorized
             </h3>
 
-            <p className="text-light small mb-3 px-2" style={{ lineHeight: "1.5", fontSize: "0.86rem", opacity: 0.95 }}>
-              This Smart PC terminal is awaiting shop cashier authorization. Please visit the cashier counter to assign this station or load credits.
+            {/* Single clean line */}
+            <p className="small mb-3 px-2 text-center" style={{ color: "#cbd5e1", fontSize: "0.88rem", lineHeight: "1.4" }}>
+              Please contact the shop cashier to authorize this Machine.
             </p>
-
-            {/* Live Auto-Unlocks Listening Status Bar (Green Theme) */}
-            <div
-              className="p-3 rounded-3 d-flex align-items-center justify-content-center gap-2 border mb-2"
-              style={{
-                background: "radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.16) 0%, rgba(6, 78, 59, 0.1) 100%)",
-                borderColor: "rgba(52, 211, 153, 0.38)",
-                boxShadow: "0 0 18px rgba(16, 185, 129, 0.15), inset 0 0 12px rgba(16, 185, 129, 0.08)",
-              }}
-            >
-              <i className="fa-solid fa-arrows-rotate fa-spin" style={{ color: "#34d399", animationDuration: "2.5s", fontSize: "0.95rem" }}></i>
-              <span className="fw-semibold small" style={{ color: "#a7f3d0", fontSize: "0.83rem" }}>
-                Auto-unlocks instantly when money is updated by cashier
-              </span>
-            </div>
 
             {/* Subtle Setup Token Recovery Option */}
             <div className="mt-2 text-center d-flex align-items-center justify-content-center gap-2">
@@ -708,6 +679,7 @@ export const ValidationModals: React.FC<ValidationModalProps> = ({
                     localStorage.removeItem("winbet_machine_id");
                     localStorage.removeItem("winbet_numeric_id");
                     localStorage.removeItem("winbet_setup_code");
+                    localStorage.removeItem("winbet_registration_token");
                     window.location.href = "/register";
                   }
                 }}
