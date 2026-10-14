@@ -315,7 +315,10 @@ body.game-lobby-body,
 }
 
 /* Custom Input Field */
-input, textarea, select, .winbet-input {
+input,
+textarea,
+select,
+.winbet-input {
   user-select: text !important;
   -webkit-user-select: text !important;
 }
@@ -2394,8 +2397,8 @@ input, textarea, select, .winbet-input {
   background: linear-gradient(90deg, rgba(14, 5, 36, 0.88) 0%, rgba(26, 8, 62, 0.94) 50%, rgba(14, 5, 36, 0.88) 100%);
   border: 1.5px solid rgba(120, 31, 245, 0.45);
   border-radius: 14px;
-  padding: 10px 16px;
-  margin-bottom: 22px;
+  padding: 8px 14px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2820,8 +2823,13 @@ input, textarea, select, .winbet-input {
 }
 
 @keyframes chamferSkeletonShimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .chamfer-css-fallback {
@@ -3092,7 +3100,7 @@ input, textarea, select, .winbet-input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 20px 0 12px 0;
+  margin: 6px 0 8px 0;
 }
 
 .section-header-title {
@@ -3141,7 +3149,7 @@ input, textarea, select, .winbet-input {
   background: linear-gradient(180deg, rgba(20, 7, 48, 0.85) 0%, rgba(10, 3, 26, 0.95) 100%);
   border: 1.5px solid rgba(120, 31, 245, 0.4);
   border-radius: 14px;
-  padding: 12px 14px 14px;
+  padding: 10px 14px 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -3837,4 +3845,3 @@ input, textarea, select, .winbet-input {
   transform: none !important;
   border-color: rgba(147, 51, 234, 0.2);
 }
-

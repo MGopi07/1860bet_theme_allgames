@@ -22,12 +22,38 @@ export const KeyboardLockProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const { machine } = useMachine("smart-pc");
   const balance = machine.balance;
   const location = useLocation();
+
   const [isOverrideUnlocked, setIsOverrideUnlocked] = useState(false);
   const [notificationMsg, setNotificationMsg] = useState<string | null>(null);
 
-  // 1. Global Admin Shortcut: Ctrl + Shift + R -> Direct Token Registration Redirect
+  // 1. Global Keyboard Protection & Admin Shortcut: Ctrl + Shift + R
   useEffect(() => {
-    const handleGlobalShortcuts = (e: KeyboardEvent) => {
+    // Attempt modern W3C Keyboard Lock API if in fullscreen/kiosk
+    if (typeof navigator !== "undefined" && "keyboard" in navigator && (navigator as any).keyboard?.lock) {
+      (navigator as any).keyboard.lock(["MetaLeft", "MetaRight", "Escape"]).catch(() => {});
+    }
+
+    const isWindowsKey = (e: KeyboardEvent) => {
+      return (
+        e.key === "Meta" ||
+        e.key === "OS" ||
+        e.code === "MetaLeft" ||
+        e.code === "MetaRight" ||
+        e.code === "OSLeft" ||
+        e.code === "OSRight" ||
+        e.keyCode === 91 ||
+        e.keyCode === 92
+      );
+    };
+
+    const handleGlobalKeyGuard = (e: KeyboardEvent) => {
+      // Always block Windows key from opening OS menu or minimizing app
+      if (isWindowsKey(e)) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+
       const isCtrlOrMeta = e.ctrlKey || e.metaKey;
       const isShift = e.shiftKey;
       const isR = e.key === "R" || e.key === "r" || e.code === "KeyR";
@@ -44,8 +70,12 @@ export const KeyboardLockProvider: React.FC<{ children: React.ReactNode }> = ({ 
       }
     };
 
-    window.addEventListener("keydown", handleGlobalShortcuts, true);
-    return () => window.removeEventListener("keydown", handleGlobalShortcuts, true);
+    window.addEventListener("keydown", handleGlobalKeyGuard, true);
+    window.addEventListener("keyup", handleGlobalKeyGuard, true);
+    return () => {
+      window.removeEventListener("keydown", handleGlobalKeyGuard, true);
+      window.removeEventListener("keyup", handleGlobalKeyGuard, true);
+    };
   }, []);
 
   // 2. If balance becomes positive (> 0), automatically clear the override and unlock
@@ -70,7 +100,8 @@ export const KeyboardLockProvider: React.FC<{ children: React.ReactNode }> = ({ 
       currentPath.startsWith("/play") ||
       currentPath === "/smart-pc/cashout");
 
-  const isLocked = isLobbyOrGamePage && balance <= 0 && !isOverrideUnlocked;
+  // Locks ALWAYS once past the register screen:
+  const isLocked = !isRegisterPage && !isOverrideUnlocked;
 
   useEffect(() => {
     // If on register/setup page OR if not locked, do NOT attach any keyboard listeners
@@ -98,16 +129,13 @@ export const KeyboardLockProvider: React.FC<{ children: React.ReactNode }> = ({ 
         e.key === "Control" ||
         e.key === "Shift" ||
         e.key === "Alt" ||
-        e.key === "Meta" ||
         e.key === "CapsLock" ||
         e.code === "ControlLeft" ||
         e.code === "ControlRight" ||
         e.code === "ShiftLeft" ||
         e.code === "ShiftRight" ||
         e.code === "AltLeft" ||
-        e.code === "AltRight" ||
-        e.code === "MetaLeft" ||
-        e.code === "MetaRight"
+        e.code === "AltRight"
       );
     };
 

@@ -4,7 +4,7 @@ interface TournamentSectionProps {
   onJoinTournament?: (tournamentName: string) => void;
 }
 
-export const TournamentSection: React.FC<TournamentSectionProps> = ({ onJoinTournament }) => {
+export const TournamentSection: React.FC<TournamentSectionProps> = React.memo(({ onJoinTournament }) => {
   const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 22, seconds: 38 });
   const [hasJoined, setHasJoined] = useState(false);
 
@@ -38,11 +38,6 @@ export const TournamentSection: React.FC<TournamentSectionProps> = ({ onJoinTour
         <h2 className="section-header-title">
           <i className="fa-solid fa-trophy text-warning"></i> Betwise Daily Tournaments & Arenas
         </h2>
-        <div className="d-flex align-items-center gap-2">
-          <span className="badge bg-danger-subtle text-danger border border-danger fw-bold px-3 py-1 rounded-pill" style={{ fontSize: "0.75rem" }}>
-            <i className="fa-solid fa-fire me-1"></i> 2 ARENAS LIVE
-          </span>
-        </div>
       </div>
 
       <div className="row g-4">
@@ -207,4 +202,5 @@ export const TournamentSection: React.FC<TournamentSectionProps> = ({ onJoinTour
       </div>
     </section>
   );
-};
+});
+

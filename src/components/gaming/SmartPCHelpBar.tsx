@@ -5,7 +5,7 @@ interface SmartPCHelpBarProps {
   shopName?: string;
 }
 
-export const SmartPCHelpBar: React.FC<SmartPCHelpBarProps> = ({ 
+export const SmartPCHelpBar: React.FC<SmartPCHelpBarProps> = React.memo(({ 
   machineName = "Smart PC",
   shopName = "Central Shop"
 }) => {
@@ -22,7 +22,7 @@ export const SmartPCHelpBar: React.FC<SmartPCHelpBarProps> = ({
                 Need Help or Cash Balance Top-Up?
               </h4>
               <p className="text-secondary small mb-0" style={{ lineHeight: "1.4" }}>
-                Approach the {shopName} Cashier Counter with your Smart PC Station Number (<strong className="text-warning">{machineName}</strong>) for instant deposit, session top-up, or cashout assistance.
+                Approach the {shopName} Cashier Counter with your Smart PC Machine Number (<strong className="text-warning">{machineName}</strong>) for instant deposit, session top-up, or cashout assistance.
               </p>
             </div>
           </div>
@@ -40,11 +40,12 @@ export const SmartPCHelpBar: React.FC<SmartPCHelpBarProps> = ({
             </div>
             <div className="trust-pill">
               <i className="fa-solid fa-lock text-info"></i>
-              <span>STATION ENCRYPTED</span>
+              <span>MACHINE  ENCRYPTED</span>
             </div>
           </div>
         </div>
       </div>
     </section>
   );
-};
+});
+

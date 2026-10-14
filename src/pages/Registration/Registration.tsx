@@ -89,12 +89,6 @@ export const Registration: React.FC<RegistrationProps> = ({
     await doRegister(newFp);
   };
 
-  const handleResetFingerprintOnly = () => {
-    const newFp = api.generateNewDeviceFingerprint();
-    setCurrentFp(newFp);
-    setErrorMessage(null);
-    showToast("Device ID reset! You can now enter your Setup Code.");
-  };
 
   const handleContinueToPlatform = () => {
     const path = machineType === "terminal" ? "/terminal" : "/smart-pc";
@@ -221,25 +215,11 @@ export const Registration: React.FC<RegistrationProps> = ({
                       )}
 
                       {/* Buttons */}
-                      <div className="d-flex justify-content-between align-items-center gap-2 mt-4" id="btnGroupScreen1">
-                        <button
-                          type="button"
-                          className="btn btn-secondary fw-semibold"
-                          style={{
-                            borderRadius: "8px",
-                            background: "rgba(255,255,255,0.1)",
-                            color: "#fff",
-                            border: "1px solid rgba(255,255,255,0.2)",
-                            padding: "0.5rem 1.2rem",
-                          }}
-                          onClick={() => navigate(-1)}
-                        >
-                          Close
-                        </button>
+                      <div className="mt-4" id="btnGroupScreen1">
                         <button
                           type="submit"
-                          className="btn-winbet flex-grow-1"
-                          style={{ padding: "0.5rem 1.2rem" }}
+                          className="btn-winbet w-100"
+                          style={{ padding: "0.6rem 1.2rem" }}
                           disabled={isLoading}
                         >
                           {isLoading ? (
@@ -251,26 +231,6 @@ export const Registration: React.FC<RegistrationProps> = ({
                               <i className="fa-solid fa-link me-1"></i> Register Machine
                             </>
                           )}
-                        </button>
-                      </div>
-
-                      {/* Device Fingerprint Info Footer */}
-                      <div
-                        className="mt-3 pt-2 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center text-secondary small"
-                        style={{ fontSize: "0.72rem" }}
-                      >
-                        <span title={currentFp} className="text-truncate me-2" style={{ maxWidth: "210px" }}>
-                          <i className="fa-solid fa-fingerprint me-1"></i>
-                          Device: <span className="font-monospace text-light">{currentFp.replace("fp_spc_", "")}</span>
-                        </span>
-                        <button
-                          type="button"
-                          className="btn btn-link btn-sm text-secondary text-decoration-none p-0"
-                          style={{ fontSize: "0.72rem" }}
-                          onClick={handleResetFingerprintOnly}
-                          title="Generate a new device ID to register as a new machine slot"
-                        >
-                          <i className="fa-solid fa-arrows-rotate me-1"></i> Reset ID
                         </button>
                       </div>
                     </form>

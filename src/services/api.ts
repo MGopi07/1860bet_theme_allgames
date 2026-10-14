@@ -62,17 +62,45 @@ let fallbackPendingCashout: { isPending: boolean; amount: number; id: number } =
   id: 0,
 };
 
+// In-memory query cache & in-flight promise deduplication
+interface CacheEntry<T> {
+  timestamp: number;
+  data: T;
+}
+
+const inFlightRequests = new Map<string, Promise<any>>();
+const queryCache = new Map<string, CacheEntry<any>>();
+
+function getCached<T>(key: string, ttlMs: number): T | null {
+  const item = queryCache.get(key);
+  if (item && Date.now() - item.timestamp < ttlMs) {
+    return item.data as T;
+  }
+  return null;
+}
+
+function setCached<T>(key: string, data: T): void {
+  queryCache.set(key, { timestamp: Date.now(), data });
+}
+
+export const clearApiCache = (): void => {
+  queryCache.clear();
+  inFlightRequests.clear();
+};
+
 export const api = {
   getDeviceFingerprint,
   generateNewDeviceFingerprint,
   getPortalSlug,
   getStoredMachineId,
+  clearCache: clearApiCache,
 
   /**
    * 4.1 Register (POST /smart-pcs/register)
    * Status 201. Returns machine metadata, balance, shop details, player_id
    */
   async registerSmartPC(payload: SmartPCRegisterPayload): Promise<SmartPCRegisterData> {
+    clearApiCache();
     const url = buildShopUrl("/smart-pcs/register", payload.portal_slug);
     const token = payload.registration_token.trim().toUpperCase();
     const fp = payload.device_fingerprint || getDeviceFingerprint();
@@ -190,163 +218,217 @@ export const api = {
 
   /**
    * 4.3 Session (GET /smart-pcs/session?machine_id=&device_fingerprint=)
+   * Deduplicates concurrent in-flight session requests
    */
   async getSession(machineId?: string, fingerprint?: string): Promise<SmartPCSessionData> {
     const mId = machineId || getStoredMachineId();
     const fp = fingerprint || getDeviceFingerprint();
-    const url = buildShopUrl(`/smart-pcs/session?machine_id=${encodeURIComponent(mId)}&device_fingerprint=${encodeURIComponent(fp)}`);
+    const inFlightKey = `session:${mId}:${fp}`;
 
-    try {
-      const res = await fetch(url, {
-        headers: {
-          Accept: "application/json",
-        },
-      });
-      const json = await res.json().catch(() => ({}));
-
-      const isUnbound =
-        res.status === 401 ||
-        res.status === 403 ||
-        res.status === 404 ||
-        res.status === 422 ||
-        json.status === "UNBOUND" ||
-        json.status === "DEAUTHORIZED" ||
-        json.status === "INACTIVE" ||
-        json.status === "UNASSIGNED" ||
-        json.data?.status === "UNBOUND" ||
-        json.data?.status === "DEAUTHORIZED" ||
-        json.data?.status === "INACTIVE" ||
-        json.data?.status === "UNASSIGNED" ||
-        (typeof json.message === "string" && (
-          json.message.toLowerCase().includes("unbound") ||
-          json.message.toLowerCase().includes("not authorized") ||
-          json.message.toLowerCase().includes("not registered") ||
-          json.message.toLowerCase().includes("fingerprint mismatch") ||
-          json.message.toLowerCase().includes("mismatch")
-        ));
-
-      if (isUnbound) {
-        const unboundBal = typeof json.data?.current_balance === "number" ? json.data.current_balance : fallbackChipsBalance;
-        broadcastStationUnbound(unboundBal);
-        return {
-          id: Number(localStorage.getItem("winbet_numeric_id")) || 0,
-          machine_id: mId,
-          hostname: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
-          terminal_name: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
-          pc_name: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
-          status: "UNBOUND",
-          current_balance: unboundBal,
-          loaded_amount: 0,
-          player_id: Number(localStorage.getItem("winbet_player_id")) || 0,
-          shop_id: Number(localStorage.getItem("winbet_shop_id")) || 0,
-          shop_name: localStorage.getItem("winbet_shop_name") || "WinBet Shop",
-          pending_cash_out: null,
-        };
-      }
-
-      if (res.ok && json.success && json.data) {
-        const data: SmartPCSessionData = json.data;
-        if (typeof data.current_balance === "number") {
-          fallbackChipsBalance = data.current_balance;
-        }
-        return data;
-      }
-    } catch (err) {
-      console.warn("API getSession failed, using active session state:", err);
+    if (inFlightRequests.has(inFlightKey)) {
+      return inFlightRequests.get(inFlightKey)!;
     }
 
-    const storedBal = localStorage.getItem("winbet_machine_balance");
-    const balance = storedBal !== null && !isNaN(Number(storedBal)) ? Number(storedBal) : fallbackChipsBalance;
+    const sessionPromise = (async (): Promise<SmartPCSessionData> => {
+      const url = buildShopUrl(`/smart-pcs/session?machine_id=${encodeURIComponent(mId)}&device_fingerprint=${encodeURIComponent(fp)}`);
 
-    return {
-      id: Number(localStorage.getItem("winbet_numeric_id")) || 0,
-      machine_id: mId,
-      hostname: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
-      terminal_name: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
-      pc_name: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
-      status: localStorage.getItem("winbet_machine_status") || "ONLINE",
-      current_balance: balance,
-      loaded_amount: 0,
-      player_id: Number(localStorage.getItem("winbet_player_id")) || 0,
-      shop_id: Number(localStorage.getItem("winbet_shop_id")) || 0,
-      shop_name: localStorage.getItem("winbet_shop_name") || "WinBet Shop",
-      pending_cash_out: fallbackPendingCashout.isPending
-        ? {
-            id: fallbackPendingCashout.id,
-            requested_amount: fallbackPendingCashout.amount,
-            status: "PENDING",
-            requested_at: new Date().toISOString(),
+      try {
+        const res = await fetch(url, {
+          headers: {
+            Accept: "application/json",
+          },
+        });
+        const json = await res.json().catch(() => ({}));
+
+        const isUnbound =
+          res.status === 401 ||
+          res.status === 403 ||
+          res.status === 404 ||
+          res.status === 422 ||
+          json.status === "UNBOUND" ||
+          json.status === "DEAUTHORIZED" ||
+          json.status === "INACTIVE" ||
+          json.status === "UNASSIGNED" ||
+          json.data?.status === "UNBOUND" ||
+          json.data?.status === "DEAUTHORIZED" ||
+          json.data?.status === "INACTIVE" ||
+          json.data?.status === "UNASSIGNED" ||
+          (typeof json.message === "string" && (
+            json.message.toLowerCase().includes("unbound") ||
+            json.message.toLowerCase().includes("not authorized") ||
+            json.message.toLowerCase().includes("not registered") ||
+            json.message.toLowerCase().includes("fingerprint mismatch") ||
+            json.message.toLowerCase().includes("mismatch")
+          ));
+
+        if (isUnbound) {
+          const unboundBal = typeof json.data?.current_balance === "number" ? json.data.current_balance : fallbackChipsBalance;
+          broadcastStationUnbound(unboundBal);
+          return {
+            id: Number(localStorage.getItem("winbet_numeric_id")) || 0,
+            machine_id: mId,
+            hostname: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
+            terminal_name: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
+            pc_name: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
+            status: "UNBOUND",
+            current_balance: unboundBal,
+            loaded_amount: 0,
+            player_id: Number(localStorage.getItem("winbet_player_id")) || 0,
+            shop_id: Number(localStorage.getItem("winbet_shop_id")) || 0,
+            shop_name: localStorage.getItem("winbet_shop_name") || "WinBet Shop",
+            pending_cash_out: null,
+          };
+        }
+
+        if (res.ok && json.success && json.data) {
+          const data: SmartPCSessionData = json.data;
+          if (typeof data.current_balance === "number") {
+            fallbackChipsBalance = data.current_balance;
           }
-        : null,
-    };
+          return data;
+        }
+      } catch (err) {
+        console.warn("API getSession failed, using active session state:", err);
+      }
+
+      const storedBal = localStorage.getItem("winbet_machine_balance");
+      const balance = storedBal !== null && !isNaN(Number(storedBal)) ? Number(storedBal) : fallbackChipsBalance;
+
+      return {
+        id: Number(localStorage.getItem("winbet_numeric_id")) || 0,
+        machine_id: mId,
+        hostname: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
+        terminal_name: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
+        pc_name: localStorage.getItem("winbet_machine_name") || mId || "Smart PC",
+        status: localStorage.getItem("winbet_machine_status") || "ONLINE",
+        current_balance: balance,
+        loaded_amount: 0,
+        player_id: Number(localStorage.getItem("winbet_player_id")) || 0,
+        shop_id: Number(localStorage.getItem("winbet_shop_id")) || 0,
+        shop_name: localStorage.getItem("winbet_shop_name") || "WinBet Shop",
+        pending_cash_out: fallbackPendingCashout.isPending
+          ? {
+              id: fallbackPendingCashout.id,
+              requested_amount: fallbackPendingCashout.amount,
+              status: "PENDING",
+              requested_at: new Date().toISOString(),
+            }
+          : null,
+      };
+    })().finally(() => {
+      inFlightRequests.delete(inFlightKey);
+    });
+
+    inFlightRequests.set(inFlightKey, sessionPromise);
+    return sessionPromise;
   },
 
   /**
    * 4.4 Providers (GET /smart-pcs/providers?page=1&limit=50&provider=)
+   * Cached for 60 seconds with in-flight deduplication
    */
-  async getProviders(search?: string, page = 1, limit = 50): Promise<SmartPCProviderItem[]> {
+  async getProviders(search?: string, page = 1, limit = 50, forceFresh = false): Promise<SmartPCProviderItem[]> {
     const searchParam = search ? `&provider=${encodeURIComponent(search)}` : "";
-    const url = buildShopUrl(`/smart-pcs/providers?page=${page}&limit=${limit}${searchParam}`);
+    const cacheKey = `providers:${search || ""}:${page}:${limit}`;
 
-    try {
-      const res = await fetch(url, {
-        headers: { Accept: "application/json" },
-      });
-      const json = await res.json();
-      if (res.ok && json.success && Array.isArray(json.data)) {
-        return json.data;
-      }
-    } catch (err) {
-      console.warn("API getProviders failed:", err);
+    if (!forceFresh) {
+      const cached = getCached<SmartPCProviderItem[]>(cacheKey, 60000);
+      if (cached) return cached;
     }
 
-    return [];
+    if (inFlightRequests.has(cacheKey)) {
+      return inFlightRequests.get(cacheKey)!;
+    }
+
+    const fetchPromise = (async (): Promise<SmartPCProviderItem[]> => {
+      const url = buildShopUrl(`/smart-pcs/providers?page=${page}&limit=${limit}${searchParam}`);
+
+      try {
+        const res = await fetch(url, {
+          headers: { Accept: "application/json" },
+        });
+        const json = await res.json();
+        if (res.ok && json.success && Array.isArray(json.data)) {
+          setCached(cacheKey, json.data);
+          return json.data;
+        }
+      } catch (err) {
+        console.warn("API getProviders failed:", err);
+      }
+
+      return [];
+    })().finally(() => {
+      inFlightRequests.delete(cacheKey);
+    });
+
+    inFlightRequests.set(cacheKey, fetchPromise);
+    return fetchPromise;
   },
 
   /**
    * 4.5 Games (GET /smart-pcs/games?page=1&limit=50 or ?provider=...)
-   * 100% Live API only - no static mock games.
    */
-  async getGames(provider?: string, page = 1, limit = 50): Promise<SmartPCGameItem[]> {
-    const res = await this.getGamesPage(provider, page, limit);
+  async getGames(provider?: string, page = 1, limit = 50, forceFresh = false): Promise<SmartPCGameItem[]> {
+    const res = await this.getGamesPage(provider, page, limit, forceFresh);
     return res.games;
   },
 
   /**
    * 4.5 Games with Full Pagination Data
+   * Cached for 30 seconds with in-flight deduplication
    */
-  async getGamesPage(provider?: string, page = 1, limit = 50): Promise<SmartPCGamesPageResponse> {
+  async getGamesPage(provider?: string, page = 1, limit = 50, forceFresh = false): Promise<SmartPCGamesPageResponse> {
     const providerParam = provider && provider.toLowerCase() !== "all" ? `&provider=${encodeURIComponent(provider)}` : "";
-    const url = buildShopUrl(`/smart-pcs/games?page=${page}&limit=${limit}${providerParam}`);
+    const cacheKey = `games:${providerParam}:${page}:${limit}`;
 
-    try {
-      const res = await fetch(url, {
-        headers: { Accept: "application/json" },
-      });
-      const json = await res.json();
-      if (res.ok && json.success && Array.isArray(json.data)) {
-        const total = json.pagination?.total || json.data.length;
-        const lastPage = json.pagination?.last_page || 1;
-        const currentPage = json.pagination?.current_page || page;
-        return {
-          games: json.data,
-          currentPage,
-          lastPage,
-          total,
-          hasMore: currentPage < lastPage,
-        };
-      }
-    } catch (err) {
-      console.warn("API getGamesPage failed:", err);
+    if (!forceFresh) {
+      const cached = getCached<SmartPCGamesPageResponse>(cacheKey, 30000);
+      if (cached) return cached;
     }
 
-    return {
-      games: [],
-      currentPage: page,
-      lastPage: 1,
-      total: 0,
-      hasMore: false,
-    };
+    if (inFlightRequests.has(cacheKey)) {
+      return inFlightRequests.get(cacheKey)!;
+    }
+
+    const fetchPromise = (async (): Promise<SmartPCGamesPageResponse> => {
+      const url = buildShopUrl(`/smart-pcs/games?page=${page}&limit=${limit}${providerParam}`);
+
+      try {
+        const res = await fetch(url, {
+          headers: { Accept: "application/json" },
+        });
+        const json = await res.json();
+        if (res.ok && json.success && Array.isArray(json.data)) {
+          const total = json.pagination?.total || json.data.length;
+          const lastPage = json.pagination?.last_page || 1;
+          const currentPage = json.pagination?.current_page || page;
+          const result: SmartPCGamesPageResponse = {
+            games: json.data,
+            currentPage,
+            lastPage,
+            total,
+            hasMore: currentPage < lastPage,
+          };
+          setCached(cacheKey, result);
+          return result;
+        }
+      } catch (err) {
+        console.warn("API getGamesPage failed:", err);
+      }
+
+      return {
+        games: [],
+        currentPage: page,
+        lastPage: 1,
+        total: 0,
+        hasMore: false,
+      };
+    })().finally(() => {
+      inFlightRequests.delete(cacheKey);
+    });
+
+    inFlightRequests.set(cacheKey, fetchPromise);
+    return fetchPromise;
   },
 
   /**

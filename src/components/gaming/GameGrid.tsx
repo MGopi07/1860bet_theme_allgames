@@ -9,8 +9,8 @@ import type { GameItem, MachineType } from "../../types";
 import { api } from "../../services/api";
 import { GameCard } from "./GameCard";
 import { LiveWinnersTicker } from "./LiveWinnersTicker";
-import { TournamentSection } from "./TournamentSection";
-import { VipPromotionsSection } from "./VipPromotionsSection";
+// import { TournamentSection } from "./TournamentSection";
+// import { VipPromotionsSection } from "./VipPromotionsSection";
 import { SmartPCHelpBar } from "./SmartPCHelpBar";
 
 interface GameGridProps {
@@ -53,7 +53,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
   machineName,
   shopName,
   onBalanceChange: _onBalanceChange,
-  showToast,
+  showToast: _showToast,
   onOpenCashout,
   onZeroBalance,
 }) => {
@@ -298,14 +298,21 @@ export const GameGrid: React.FC<GameGridProps> = ({
   });
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
     const handleResize = () => {
-      setIsMobileDevice(
-        window.innerWidth < 768 ||
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-      );
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsMobileDevice(
+          window.innerWidth < 768 ||
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        );
+      }, 150);
     };
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const filteredGames = useMemo(() => {
@@ -361,7 +368,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
   }, [catalogGames, selectedFilter, selectedSubProvider, searchQuery, isMobileDevice]);
 
   // Open Game directly on dedicated GamePlayPage with Header
-  const handleLaunchGame = (game: GameItem) => {
+  const handleLaunchGame = useCallback((game: GameItem) => {
     if (balance <= 0) {
       if (onZeroBalance) {
         onZeroBalance();
@@ -377,15 +384,15 @@ export const GameGrid: React.FC<GameGridProps> = ({
       : `/smart-pc/play/${encodeURIComponent(gameIdentifier)}`;
 
     navigate(playRoute, { state: { game } });
-  };
+  }, [balance, onZeroBalance, onOpenCashout, isTerminal, navigate]);
 
-  const handleJoinTournament = (tourName: string) => {
-    showToast?.(`Successfully enrolled in ${tourName}! Your points are now tracking.`);
-  };
+  // const handleJoinTournament = useCallback((tourName: string) => {
+  //   showToast?.(`Successfully enrolled in ${tourName}! Your points are now tracking.`);
+  // }, [showToast]);
 
-  const handleClaimPromo = (promoName: string) => {
-    showToast?.(`${promoName} activated! Approach Cashier Desk to claim.`);
-  };
+  // const handleClaimPromo = useCallback((promoName: string) => {
+  //   showToast?.(`${promoName} activated! Approach Cashier Desk to claim.`);
+  // }, [showToast]);
 
   return (
     <>
@@ -416,17 +423,6 @@ export const GameGrid: React.FC<GameGridProps> = ({
               onClick={() => scrollToCatalog("all")}
             >
               <i className="fa-solid fa-grid-2"></i> All Games ({totalGames || catalogGames.length})
-            </button>
-            <button
-              type="button"
-              className="btn btn-sm btn-outline-secondary text-light rounded-pill px-3"
-              onClick={() => {
-                setSelectedFilter("all");
-                setSelectedSubProvider("all");
-                setSearchQuery("");
-              }}
-            >
-              <i className="fa-solid fa-arrows-rotate me-1"></i> Reset
             </button>
           </div>
         </div>
@@ -544,7 +540,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
 
         {/* Filtered Games Grid (Pure API) */}
         {!isLoading && (
-          <div className="games-grid mt-3" id="categoryGamesGridContainer">
+          <div className="games-grid mt-1" id="categoryGamesGridContainer">
             {filteredGames.map((game) => (
               <GameCard key={game.id} game={game} onPlay={handleLaunchGame} />
             ))}
@@ -782,14 +778,14 @@ export const GameGrid: React.FC<GameGridProps> = ({
             </Swiper>
           </section>
 
-          {/* SECTION 5: DAILY TOURNAMENTS & CHALLENGES ARENA */}
-          <TournamentSection onJoinTournament={handleJoinTournament} />
+          {/* SECTION 5: DAILY TOURNAMENTS & CHALLENGES ARENA (HIDDEN) */}
+          {/* <TournamentSection onJoinTournament={handleJoinTournament} /> */}
 
-          {/* SECTION 6: VIP REWARDS & CASHIER PERKS */}
-          <VipPromotionsSection
+          {/* SECTION 6: VIP REWARDS & CASHIER PERKS (HIDDEN) */}
+          {/* <VipPromotionsSection
             onClaimPromo={handleClaimPromo}
             onOpenCashout={onOpenCashout}
-          />
+          /> */}
 
           {/* SECTION 7: SMART PC HELP & FAIR PLAY ASSURANCE */}
           <SmartPCHelpBar machineName={machineName} shopName={shopName} />
