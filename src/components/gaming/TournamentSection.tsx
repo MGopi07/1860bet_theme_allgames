@@ -36,7 +36,7 @@ export const TournamentSection: React.FC<TournamentSectionProps> = React.memo(({
     <section className="tournament-arena-section mb-5">
       <div className="section-header-bar">
         <h2 className="section-header-title">
-          <i className="fa-solid fa-trophy text-warning"></i> Betwise Daily Tournaments & Arenas
+          <i className="fa-solid fa-trophy text-warning"></i> 1860BET Daily Tournaments & Arenas
         </h2>
       </div>
 

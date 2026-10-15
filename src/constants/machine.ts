@@ -3,7 +3,7 @@ import type { GameItem, Machine, ShopInfo } from "../types";
 export const VALID_SETUP_CODE = "";
 
 export const shop: ShopInfo = {
-  name: localStorage.getItem("winbet_shop_name") || "Betwise Shop",
+  name: localStorage.getItem("winbet_shop_name") || "1860BET Shop",
   location: "Betting Station Central",
   tagline: "Live Gaming Station • Official Terminal",
 };
@@ -13,7 +13,7 @@ export const machineConfig: { smartPc: Machine; terminal: Machine } = {
     name: localStorage.getItem("winbet_machine_name") || "Smart PC",
     type: "smart-pc",
     balance: 0.0,
-    shopName: localStorage.getItem("winbet_shop_name") || "Betwise Shop",
+    shopName: localStorage.getItem("winbet_shop_name") || "1860BET Shop",
     location: shop.location,
     action: "Cash Out",
   },
@@ -21,7 +21,7 @@ export const machineConfig: { smartPc: Machine; terminal: Machine } = {
     name: localStorage.getItem("winbet_machine_name") || "Terminal",
     type: "terminal",
     balance: 0.0,
-    shopName: localStorage.getItem("winbet_shop_name") || "Betwise Shop",
+    shopName: localStorage.getItem("winbet_shop_name") || "1860BET Shop",
     location: shop.location,
     action: "Print Cashout Ticket",
   },

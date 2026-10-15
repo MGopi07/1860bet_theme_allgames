@@ -1,52 +1,79 @@
 /* ==========================================================================
-   WINBET MASTER DESIGN SYSTEM - THEME TOKENS
-   Source of Truth based on Register.html & Gaming Machine Standards
+   1860BET MASTER DESIGN SYSTEM - THEME TOKENS
+   Tailored to 1860BET Vibrant Orange, Ivory/Cream & Obsidian Ember Palette
    ========================================================================== */
 
 :root {
-  /* Exact Color Tokens from Register Theme */
-  --bg-deep: #060212;
-  --bg-card: #0d0622;
-  --bg-card-glass: rgba(13, 6, 34, 0.9);
-  --card-bg-gradient: linear-gradient(180deg, #13092e 0%, #0c041f 100%);
-  --inner-panel-bg: rgba(9, 3, 23, 0.85);
+  /* 1860BET Brand Colors */
+  --brand-orange: #F5831F;
+  --brand-orange-bright: #FF9431;
+  --brand-orange-deep: #D96A06;
+  --brand-orange-dark: #8F3E00;
+  --brand-cream: #FDF3E3;
+  --brand-ivory: #FFF9F0;
+  --brand-gold: #FFB800;
 
-  --card-border: #4d1d8f;
-  --card-border-glow: rgba(147, 51, 234, 0.45);
-  --card-inner-glow: rgba(112, 26, 212, 0.15);
-  --border-purple-glow: #6f26d9;
-  --border-purple-light: #9d4edd;
+  /* Deep Sleek Gaming Backgrounds (Warm Charcoal & Ember) */
+  --bg-deep: #090705;
+  --bg-card: #130E09;
+  --bg-card-glass: rgba(19, 14, 9, 0.92);
+  --card-bg-gradient: linear-gradient(180deg, #18120B 0%, #0E0A06 100%);
+  --inner-panel-bg: rgba(15, 11, 7, 0.9);
 
-  /* Vibrant Buttons */
-  --purple-btn-start: #7d12f5;
-  --purple-btn-mid: #6811db;
-  --purple-btn-end: #4908a8;
-  --purple-btn-gradient: linear-gradient(180deg, #781ff5 0%, #590fc9 50%, #4609a3 100%);
-  --purple-btn-hover: linear-gradient(180deg, #8a35ff 0%, #6817e8 50%, #510bbd 100%);
-  
+  /* Card Borders & Atmospheric Glows */
+  --card-border: #4A2810;
+  --card-border-glow: rgba(245, 131, 31, 0.38);
+  --card-inner-glow: rgba(245, 131, 31, 0.12);
+  --border-orange-glow: #F5831F;
+  --border-orange-light: #FF9B42;
+
+  /* Aliases for legacy component selectors */
+  --border-purple-glow: #F5831F;
+  --border-purple-light: #FF9B42;
+
+  /* Vibrant 1860BET Action Buttons */
+  --orange-btn-start: #FF9431;
+  --orange-btn-mid: #F5831F;
+  --orange-btn-end: #D96A06;
+  --orange-btn-gradient: linear-gradient(180deg, #FF9431 0%, #F5831F 50%, #D96A06 100%);
+  --orange-btn-hover: linear-gradient(180deg, #FFA754 0%, #FF8D26 50%, #E8740A 100%);
+  --orange-btn-glow: rgba(245, 131, 31, 0.5);
+
+  /* Legacy aliases mapped to 1860BET Orange for automatic compatibility */
+  --purple-btn-start: #FF9431;
+  --purple-btn-mid: #F5831F;
+  --purple-btn-end: #D96A06;
+  --purple-btn-gradient: linear-gradient(180deg, #FF9431 0%, #F5831F 50%, #D96A06 100%);
+  --purple-btn-hover: linear-gradient(180deg, #FFA754 0%, #FF8D26 50%, #E8740A 100%);
+
   /* Cancel / Dark Buttons */
-  --cancel-btn-bg: #15082e;
-  --cancel-btn-border: #3b166d;
+  --cancel-btn-bg: #1A130C;
+  --cancel-btn-border: #442813;
 
-  /* Gold & Accents */
-  --gold-accent: #f5b300;
-  --gold-primary: #f5b300;
-  --gold-light: #ffe066;
-  --gold-glow: rgba(245, 179, 0, 0.45);
-  --gold-gradient: linear-gradient(180deg, #ffe066 0%, #f5b300 50%, #d49000 100%);
+  /* Gold & Accents (Coins, Jackpot, Chips) */
+  --gold-accent: #FFB800;
+  --gold-primary: #FFB800;
+  --gold-light: #FFE066;
+  --gold-glow: rgba(255, 184, 0, 0.45);
+  --gold-gradient: linear-gradient(180deg, #FFE066 0%, #FFB800 50%, #D49000 100%);
 
-  /* Emerald Green Neon */
+  /* Emerald Green Neon (Live status / online) */
   --neon-green: #22c55e;
   --neon-green-glow: rgba(34, 197, 94, 0.55);
 
-  /* Text & Inputs */
-  --text-light: #f3effc;
-  --text-dim: #a491ca;
-  --text-muted-purple: #9d8ec2;
-  --input-border: #3b1875;
-  --input-bg: #090317;
+  /* Neon Orange Accent */
+  --neon-orange: #F5831F;
+  --neon-orange-glow: rgba(245, 131, 31, 0.6);
 
-  --navbar-bg: linear-gradient(90deg, #0e0524 0%, #180838 50%, #0e0524 100%);
+  /* Text & Inputs */
+  --text-light: #FFFDF9;
+  --text-dim: #C8B8A6;
+  --text-muted-purple: #A69482;
+  --text-muted: #A69482;
+  --input-border: #4A2810;
+  --input-bg: #0C0805;
+
+  --navbar-bg: linear-gradient(90deg, #0E0A06 0%, #1B130B 50%, #0E0A06 100%);
   --tile-radius: 18px;
   --card-radius: 20px;
 }

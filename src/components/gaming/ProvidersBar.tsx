@@ -11,7 +11,7 @@ const PROVIDERS = [
   { id: "pragmatic", name: "Pragmatic Play", icon: "fa-solid fa-crown text-warning", count: "15 Games" },
   { id: "evolution", name: "Evolution Live", icon: "fa-solid fa-video text-info", count: "8 Tables" },
   { id: "netent", name: "NetEnt Classics", icon: "fa-solid fa-gem text-success", count: "12 Slots" },
-  { id: "betwise", name: "Betwise Originals", icon: "fa-solid fa-shield-cat text-warning", count: "Exclusive", isPopular: true },
+  { id: "1860bet", name: "1860BET Originals", icon: "fa-solid fa-shield-cat text-warning", count: "Exclusive", isPopular: true },
 ];
 
 export const ProvidersBar: React.FC<ProvidersBarProps> = ({
@@ -43,7 +43,14 @@ export const ProvidersBar: React.FC<ProvidersBarProps> = ({
                   <i className={`${prov.icon} fs-5`}></i>
                   <span className="provider-name">{prov.name}</span>
                   {prov.isPopular && (
-                    <span className="badge bg-warning text-dark px-1 py-0 fw-bold" style={{ fontSize: "0.55rem" }}>
+                    <span
+                      className="badge px-1 py-0 fw-bold"
+                      style={{
+                        fontSize: "0.55rem",
+                        background: "linear-gradient(135deg, #FF9431 0%, #F5831F 100%)",
+                        color: "#ffffff",
+                      }}
+                    >
                       TOP
                     </span>
                   )}

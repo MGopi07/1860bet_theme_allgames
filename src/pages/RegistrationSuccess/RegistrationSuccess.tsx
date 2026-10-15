@@ -31,26 +31,19 @@ export const RegistrationSuccess: React.FC = () => {
         {/* Top Controls Bar */}
         <div
           className="d-flex flex-wrap justify-content-between align-items-center mb-4 border-bottom pb-3"
-          style={{ borderColor: "rgba(94, 23, 187, 0.4)" }}
+          style={{ borderColor: "rgba(245, 131, 31, 0.4)" }}
         >
           <div className="d-flex align-items-center gap-2">
             <Link to="/register" className="brand-logo-wrap text-decoration-none mb-0">
               <img
                 src="/assets/images/logo.png"
-                alt="BETWISE"
+                alt="1860BET"
                 className="brand-logo-img logo-sm"
-                style={{ height: "38px" }}
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                }}
+                style={{ height: "28px" }}
               />
-              <span className="brand-name fs-5">
-                <span style={{ color: "#f5b300" }}>BET</span>
-                <span style={{ color: "#ffffff" }}>WISE</span>
-              </span>
             </Link>
             <span
-              className="badge ms-2 bg-dark text-warning border border-warning-subtle"
+              className="badge ms-2 border" style={{ background: "rgba(245, 131, 31, 0.15)", borderColor: "rgba(245, 131, 31, 0.5)", color: "#FF9431" }}
               style={{ fontSize: "0.75rem" }}
             >
               REGISTRATION PORTAL
@@ -79,12 +72,9 @@ export const RegistrationSuccess: React.FC = () => {
                   <div className="winbet-logo mb-3">
                     <img
                       src="/assets/images/logo.png"
-                      alt="BETWISE"
+                      alt="1860BET"
                       className="brand-logo-img logo-sm"
                       style={{ maxHeight: "48px" }}
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
                     />
                   </div>
 
@@ -140,7 +130,7 @@ export const RegistrationSuccess: React.FC = () => {
                       <i className="fa-solid fa-scale-balanced"></i>
                     </div>
                     <div className="brand-text-block">
-                      <span className="brand-title">Betwise Central</span>
+                      <span className="brand-title">1860BET Central</span>
                       <span className="brand-sub">Independent. Fair. Reliable. Windhoek Central.</span>
                     </div>
                   </div>

@@ -27,7 +27,7 @@ export const NotAuthorized: React.FC = () => {
   };
 
   return (
-    <div className="d-flex flex-column min-vh-100" style={{ background: "radial-gradient(circle at 50% 20%, #1c0628 0%, #080214 100%)" }}>
+    <div className="d-flex flex-column min-vh-100" style={{ background: "radial-gradient(circle at 50% 20%, #1c100a 0%, #090705 100%)" }}>
       <div className="container-fluid px-lg-5 py-3 d-flex flex-column flex-grow-1">
         {/* Top Header */}
         <div
@@ -36,10 +36,12 @@ export const NotAuthorized: React.FC = () => {
         >
           <div className="d-flex align-items-center gap-2">
             <Link to="/register" className="brand-logo-wrap text-decoration-none mb-0">
-              <span className="brand-name fs-5">
-                <span style={{ color: "#f5b300" }}>WIN</span>
-                <span style={{ color: "#ffffff" }}>BET</span>
-              </span>
+              <img
+                src="/assets/images/logo.png"
+                alt="1860BET"
+                className="brand-logo-img logo-sm"
+                style={{ height: "38px" }}
+              />
             </Link>
             <span
               className="badge ms-2 bg-danger text-white border border-danger-subtle"
@@ -88,7 +90,7 @@ export const NotAuthorized: React.FC = () => {
                         justifyContent: "center",
                         color: "#ffffff",
                         fontSize: "2.4rem",
-                        animation: "pulse3DGlow 2.5s infinite alternate ease-in-out"
+                        animation: "pulse3DRedGlow 2.5s infinite alternate ease-in-out"
                       }}
                     >
                       <i className="fa-solid fa-lock"></i>
@@ -150,7 +152,7 @@ export const NotAuthorized: React.FC = () => {
                       <i className="fa-solid fa-scale-balanced"></i>
                     </div>
                     <div className="brand-text-block">
-                      <span className="brand-title">Betwise Security</span>
+                      <span className="brand-title">1860BET Security</span>
                       <span className="brand-sub">Hardware Binding · Tauri PC Protection</span>
                     </div>
                   </div>

@@ -37,20 +37,14 @@ export const GamingHeader: React.FC<GamingHeaderProps> = ({
           <Link
             to={machineType === "terminal" ? "/terminal" : "/smart-pc"}
             className="d-flex align-items-center gap-2 text-decoration-none me-1"
-            title="Betwise Station"
+            title="1860BET Station"
           >
-            {/* <img
+            <img
               src="/assets/images/logo.png"
-              alt="BETWISE"
+              alt="1860BET"
               className="brand-logo-img logo-sm"
-              onError={(e) => {
-                e.currentTarget.style.display = "none";
-              }}
-            /> */}
-            <span className="brand-name">
-              <span style={{ color: "#f5b300" }}>BET</span>
-              <span style={{ color: "#ffffff" }}>WISE</span>
-            </span>
+              style={{ maxHeight: "32px", objectFit: "contain" }}
+            />
           </Link>
 
           {/* Dedicated Station Badge & Type */}
@@ -61,15 +55,15 @@ export const GamingHeader: React.FC<GamingHeaderProps> = ({
                 className="badge border text-light px-2 py-1 d-inline-flex align-items-center gap-1"
                 style={{
                   fontSize: "0.74rem",
-                  background: "rgba(94, 23, 187, 0.4)",
-                  borderColor: "rgba(168, 85, 247, 0.5)",
+                  background: "rgba(245, 131, 31, 0.22)",
+                  borderColor: "rgba(245, 131, 31, 0.5)",
                 }}
               >
-                <i className="fa-solid fa-desktop text-warning"></i> SMART PC
+                <i className="fa-solid fa-desktop" style={{ color: "#FF9431" }}></i> SMART PC
               </span>
             ) : (
               <span
-                className="badge bg-dark text-warning border border-warning-subtle px-2 py-1 d-inline-flex align-items-center gap-1"
+                className="badge border px-2 py-1 d-inline-flex align-items-center gap-1" style={{ fontSize: "0.74rem", background: "rgba(245, 131, 31, 0.15)", borderColor: "rgba(245, 131, 31, 0.4)", color: "#FF9431" }}
                 style={{ fontSize: "0.74rem" }}
               >
                 <i className="fa-solid fa-receipt"></i> TERMINAL
@@ -79,7 +73,7 @@ export const GamingHeader: React.FC<GamingHeaderProps> = ({
               {machineName}
             </span>
             <span className="text-secondary">|</span>
-            <span className="text-warning-subtle" id="stationShopDisplay" style={{ fontSize: "0.76rem" }}>
+            <span id="stationShopDisplay" style={{ fontSize: "0.76rem", color: "#FDF3E3" }}>
               {shopName}
             </span>
           </div>

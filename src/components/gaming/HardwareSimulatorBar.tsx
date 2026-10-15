@@ -24,8 +24,8 @@ export const HardwareSimulatorBar: React.FC<HardwareSimulatorBarProps> = ({
     <div
       className="hardware-simulator-bar position-sticky bottom-0 start-0 end-0 z-3 p-2 text-light"
       style={{
-        background: "rgba(13, 5, 29, 0.95)",
-        borderTop: "1.5px solid rgba(168, 85, 247, 0.35)",
+        background: "rgba(16, 11, 7, 0.95)",
+        borderTop: "1.5px solid rgba(245, 131, 31, 0.35)",
         backdropFilter: "blur(12px)",
         boxShadow: "0 -8px 25px rgba(0, 0, 0, 0.6)",
       }}
@@ -62,7 +62,7 @@ export const HardwareSimulatorBar: React.FC<HardwareSimulatorBarProps> = ({
 
         {/* Expandable Controls Drawer */}
         {isExpanded && (
-          <div className="pt-3 mt-2 border-top border-purple-900 animate__animated animate__fadeIn">
+          <div className="pt-3 mt-2 border-top border-warning border-opacity-25 animate__animated animate__fadeIn">
             <div className="row g-2">
               {/* ==============================================================
                   TERMINAL HARDWARE CONTROLS
@@ -73,7 +73,7 @@ export const HardwareSimulatorBar: React.FC<HardwareSimulatorBarProps> = ({
                   <div className="col-12 col-md-4">
                     <div
                       className="p-2 rounded h-100 border"
-                      style={{ background: "rgba(22, 10, 48, 0.6)", borderColor: "rgba(147, 51, 234, 0.3)" }}
+                      style={{ background: "rgba(22, 15, 10, 0.6)", borderColor: "rgba(245, 131, 31, 0.3)" }}
                     >
                       <div className="d-flex align-items-center justify-content-between mb-2">
                         <span className="fw-bold text-warning small d-flex align-items-center gap-1">
@@ -136,7 +136,7 @@ export const HardwareSimulatorBar: React.FC<HardwareSimulatorBarProps> = ({
                   <div className="col-12 col-md-4">
                     <div
                       className="p-2 rounded h-100 border"
-                      style={{ background: "rgba(22, 10, 48, 0.6)", borderColor: "rgba(147, 51, 234, 0.3)" }}
+                      style={{ background: "rgba(22, 15, 10, 0.6)", borderColor: "rgba(245, 131, 31, 0.3)" }}
                     >
                       <div className="d-flex align-items-center justify-content-between mb-2">
                         <span className="fw-bold text-info small d-flex align-items-center gap-1">
@@ -183,7 +183,7 @@ export const HardwareSimulatorBar: React.FC<HardwareSimulatorBarProps> = ({
                   <div className="col-12 col-md-4">
                     <div
                       className="p-2 rounded h-100 border"
-                      style={{ background: "rgba(22, 10, 48, 0.6)", borderColor: "rgba(147, 51, 234, 0.3)" }}
+                      style={{ background: "rgba(22, 15, 10, 0.6)", borderColor: "rgba(245, 131, 31, 0.3)" }}
                     >
                       <div className="d-flex align-items-center justify-content-between mb-2">
                         <span className="fw-bold text-warning small d-flex align-items-center gap-1">
@@ -237,7 +237,7 @@ export const HardwareSimulatorBar: React.FC<HardwareSimulatorBarProps> = ({
                   <div className="col-12 col-md-6">
                     <div
                       className="p-2 rounded h-100 border"
-                      style={{ background: "rgba(22, 10, 48, 0.6)", borderColor: "rgba(147, 51, 234, 0.3)" }}
+                      style={{ background: "rgba(22, 15, 10, 0.6)", borderColor: "rgba(245, 131, 31, 0.3)" }}
                     >
                       <div className="d-flex align-items-center justify-content-between mb-2">
                         <span className="fw-bold text-success small d-flex align-items-center gap-1">
@@ -284,7 +284,7 @@ export const HardwareSimulatorBar: React.FC<HardwareSimulatorBarProps> = ({
                   <div className="col-12 col-md-6">
                     <div
                       className="p-2 rounded h-100 border"
-                      style={{ background: "rgba(22, 10, 48, 0.6)", borderColor: "rgba(147, 51, 234, 0.3)" }}
+                      style={{ background: "rgba(22, 15, 10, 0.6)", borderColor: "rgba(245, 131, 31, 0.3)" }}
                     >
                       <div className="d-flex align-items-center justify-content-between mb-2">
                         <span className="fw-bold text-warning small d-flex align-items-center gap-1">
@@ -322,7 +322,7 @@ export const HardwareSimulatorBar: React.FC<HardwareSimulatorBarProps> = ({
               )}
 
               {/* System Security / Unbind Test Row */}
-              <div className="col-12 pt-2 border-top border-purple-900 d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <div className="col-12 pt-2 border-top border-warning border-opacity-25 d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div className="text-secondary small" style={{ fontSize: "0.76rem" }}>
                   <i className="fa-solid fa-fingerprint me-1 text-warning"></i>
                   <strong>Hardware Fingerprint & Unbind Flow:</strong> Test what happens when PC is unbound or unauthorized

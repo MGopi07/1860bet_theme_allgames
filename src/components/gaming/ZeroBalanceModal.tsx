@@ -21,41 +21,42 @@ export const ZeroBalanceModal: React.FC<ZeroBalanceModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose} maxWidth="410px">
       <div className="modal-body p-4 text-center">
         {/* Step Pill */}
-        <div className="step-pill-box justify-content-center mb-3">
-          <span className="pill-text fw-bold text-warning">
-            <i className="fa-solid fa-coins me-1"></i> Station Balance Alert
+        <div className="d-flex align-items-center justify-content-center gap-2 mb-3">
+          <i className="fa-solid fa-coins text-warning"></i>
+          <span className="fw-bold text-uppercase" style={{ color: "#FDF3E3", letterSpacing: "0.5px", fontSize: "1.05rem" }}>
+            Station Balance Alert
           </span>
         </div>
 
-        {/* 3D Glowing Animated Coin Icon */}
+        {/* 3D Glowing Animated Coin Icon (1860BET Orange & Gold Glow - No Green) */}
         <div className="d-flex justify-content-center mb-3">
           <div
             style={{
               width: "78px",
               height: "78px",
               borderRadius: "50%",
-              background: "radial-gradient(circle at 35% 30%, #fbbf24 0%, #d97706 65%, #78350f 100%)",
-              border: "2.5px solid #fde68a",
-              boxShadow: "0 0 35px rgba(245, 179, 0, 0.75), inset 0 2px 6px rgba(255, 255, 255, 0.7)",
+              background: "radial-gradient(circle at 35% 30%, #FFAA52 0%, #F5831F 55%, #A84E00 100%)",
+              border: "2.5px solid #FFAE66",
+              boxShadow: "0 5px 0 #662E00, 0 0 30px rgba(245, 131, 31, 0.65), inset 0 2px 6px rgba(255, 255, 255, 0.7)",
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
               color: "#ffffff",
               fontSize: "2.1rem",
-              animation: "pulse3DGlow 2.5s infinite alternate ease-in-out",
+              animation: "pulse3DOrangeGlow 2.5s infinite alternate ease-in-out",
             }}
           >
             <i className="fa-solid fa-hand-holding-dollar"></i>
           </div>
         </div>
 
-        {/* Inner Zero Balance Panel */}
+        {/* Inner Zero Balance Panel (Warm Obsidian Frame) */}
         <div
           className="p-3 rounded-3 mb-3 text-center"
           style={{
-            background: "radial-gradient(circle at 50% 0%, #200c40 0%, #0d031c 100%)",
-            border: "1.5px solid rgba(245, 179, 0, 0.4)",
-            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(245, 179, 0, 0.1)",
+            background: "linear-gradient(180deg, #18110A 0%, #0D0805 100%)",
+            border: "1.5px solid rgba(245, 131, 31, 0.4)",
+            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(245, 131, 31, 0.1)",
           }}
         >
           <p className="text-secondary small text-uppercase mb-1" style={{ fontSize: "0.74rem", letterSpacing: "0.5px" }}>
@@ -68,7 +69,7 @@ export const ZeroBalanceModal: React.FC<ZeroBalanceModalProps> = ({
 
           <div
             className="p-2 rounded-2 text-start small mb-1"
-            style={{ background: "rgba(94, 23, 187, 0.25)", border: "1px solid rgba(168, 85, 247, 0.2)" }}
+            style={{ background: "rgba(245, 131, 31, 0.12)", border: "1px solid rgba(245, 131, 31, 0.3)" }}
           >
             <div className="d-flex align-items-start gap-2 text-light" style={{ fontSize: "0.82rem" }}>
               <i className="fa-solid fa-cash-register text-warning mt-1"></i>
@@ -85,9 +86,9 @@ export const ZeroBalanceModal: React.FC<ZeroBalanceModalProps> = ({
           Once coins are loaded by the cashier, your balance will update instantly.
         </p>
 
-        {/* Action Button */}
+        {/* Action Button - 3D Orange 1860BET Brand Action Button */}
         <div className="d-flex flex-column gap-2">
-          <Button variant="gold" onClick={onClose} className="w-100 py-2 fw-bold text-dark">
+          <Button variant="primary" onClick={onClose} className="w-100 py-2 fw-bold">
             <i className="fa-solid fa-circle-check me-1"></i> Understood, Visit Cashier
           </Button>
         </div>

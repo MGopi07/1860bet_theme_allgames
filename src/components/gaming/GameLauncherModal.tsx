@@ -169,14 +169,14 @@ export const GameLauncherModal: React.FC<GameLauncherModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose} maxWidth={viewMode === "iframe" ? "820px" : "560px"}>
       <div className="game-launcher-box p-3 p-md-4 text-center">
         {/* Game Title & Header Bar */}
-        <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3" style={{ borderColor: "rgba(168, 85, 247, 0.3)" }}>
+        <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3" style={{ borderColor: "rgba(245, 131, 31, 0.3)" }}>
           <div className="text-start pe-3">
             <h3 className="fw-bold text-warning mb-1" style={{ fontSize: "1.35rem", letterSpacing: "1px", textTransform: "uppercase" }}>
               {game.title}
             </h3>
             <div className="d-flex align-items-center gap-2">
-              <span className="badge" style={{ fontSize: "0.68rem", background: "rgba(147, 51, 234, 0.3)", border: "1px solid #9333ea", color: "#ddd6fe" }}>
-                <i className="fa-solid fa-gamepad me-1"></i> {game.provider || "BETWISE"}
+              <span className="badge" style={{ fontSize: "0.68rem", background: "rgba(245, 131, 31, 0.2)", border: "1px solid #F5831F", color: "#FDF3E3" }}>
+                <i className="fa-solid fa-gamepad me-1"></i> {game.provider || "1860BET"}
               </span>
               <span className="badge" style={{ fontSize: "0.68rem", background: "rgba(16, 185, 129, 0.15)", border: "1px solid #10b981", color: "#6ee7b7" }}>
                 <i className="fa-solid fa-circle text-success me-1" style={{ fontSize: "0.45rem" }}></i> LIVE SESSION
@@ -185,7 +185,7 @@ export const GameLauncherModal: React.FC<GameLauncherModalProps> = ({
           </div>
 
           <div className="d-flex align-items-center gap-2">
-            <div className="px-3 py-1 rounded-pill bg-dark border border-warning-subtle text-warning fw-bold small">
+            <div className="px-3 py-1 rounded-pill border fw-bold small" style={{ background: "rgba(245, 131, 31, 0.15)", borderColor: "rgba(245, 131, 31, 0.5)", color: "#FF9431" }}>
               {formatCurrency(balance)}
             </div>
           </div>
@@ -193,7 +193,7 @@ export const GameLauncherModal: React.FC<GameLauncherModalProps> = ({
 
         {/* View Mode 1: Provider Live Iframe (PDF 4.6) */}
         {viewMode === "iframe" ? (
-          <div className="provider-iframe-container mb-3 position-relative rounded-4 overflow-hidden border border-purple-800" style={{ minHeight: "420px", background: "#090217" }}>
+          <div className="provider-iframe-container mb-3 position-relative rounded-4 overflow-hidden border border-warning border-opacity-25" style={{ minHeight: "420px", background: "#0C0805" }}>
             {isLaunching ? (
               <div className="d-flex flex-column align-items-center justify-content-center py-5" style={{ minHeight: "400px" }}>
                 <div className="spinner-border text-warning mb-3" role="status"></div>
@@ -229,9 +229,9 @@ export const GameLauncherModal: React.FC<GameLauncherModalProps> = ({
               <div
                 className="reels-container p-4 mb-4 rounded-4 position-relative overflow-hidden"
                 style={{
-                  background: "radial-gradient(circle at 50% 50%, #170736 0%, #080214 100%)",
-                  border: "2.5px solid #7c3aed",
-                  boxShadow: "0 0 25px rgba(124, 58, 237, 0.4), inset 0 15px 30px rgba(0,0,0,0.8)",
+                  background: "radial-gradient(circle at 50% 50%, #1f140b 0%, #0a0704 100%)",
+                  border: "2.5px solid #FF9B42",
+                  boxShadow: "0 0 25px rgba(245, 131, 31, 0.4), inset 0 15px 30px rgba(0,0,0,0.8)",
                 }}
               >
                 <div className="d-flex justify-content-center gap-3">
@@ -263,7 +263,7 @@ export const GameLauncherModal: React.FC<GameLauncherModalProps> = ({
               <div
                 className="arcade-stage p-4 mb-4 rounded-4 position-relative overflow-hidden"
                 style={{
-                  background: "radial-gradient(circle at 50% 50%, #1e0b3d 0%, #090217 100%)",
+                  background: "radial-gradient(circle at 50% 50%, #2A170A 0%, #0C0805 100%)",
                   border: "2px solid rgba(245, 179, 0, 0.45)",
                   boxShadow: "0 0 25px rgba(245, 179, 0, 0.25), inset 0 10px 25px rgba(0,0,0,0.8)",
                 }}
@@ -326,14 +326,14 @@ export const GameLauncherModal: React.FC<GameLauncherModalProps> = ({
             {/* Stake Controls (PDF 4.7 min stake 10) */}
             <div
               className="d-flex align-items-center justify-content-between p-3 rounded-4 mb-3"
-              style={{ background: "rgba(0, 0, 0, 0.45)", border: "1px solid rgba(147, 51, 234, 0.4)" }}
+              style={{ background: "rgba(0, 0, 0, 0.45)", border: "1px solid rgba(245, 131, 31, 0.35)" }}
             >
               <span className="text-secondary small fw-bold text-uppercase ms-2">Bet Amount</span>
               <div className="d-flex align-items-center gap-3">
                 <button
                   type="button"
                   className="btn btn-sm text-light rounded-circle d-flex align-items-center justify-content-center"
-                  style={{ width: "34px", height: "34px", background: "rgba(147, 51, 234, 0.4)", border: "1px solid #a855f7" }}
+                  style={{ width: "34px", height: "34px", background: "rgba(245, 131, 31, 0.25)", border: "1px solid #F5831F" }}
                   onClick={() => setStake((prev) => Math.max(10, prev - 10))}
                   disabled={isPlaying}
                 >
@@ -345,7 +345,7 @@ export const GameLauncherModal: React.FC<GameLauncherModalProps> = ({
                 <button
                   type="button"
                   className="btn btn-sm text-light rounded-circle d-flex align-items-center justify-content-center"
-                  style={{ width: "34px", height: "34px", background: "rgba(147, 51, 234, 0.4)", border: "1px solid #a855f7" }}
+                  style={{ width: "34px", height: "34px", background: "rgba(245, 131, 31, 0.25)", border: "1px solid #F5831F" }}
                   onClick={() => setStake((prev) => Math.min(500, prev + 10))}
                   disabled={isPlaying}
                 >

@@ -408,7 +408,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
         <div className="section-header-bar">
           <div className="d-flex align-items-center gap-3">
             <h2 className="section-header-title mb-0">
-              <i className="fa-solid fa-gamepad text-warning"></i> Game Categories
+              <i className="fa-solid fa-gamepad" style={{ color: "#FF9431" }}></i> Game Categories
             </h2>
           </div>
           <div className="d-flex align-items-center gap-2">
@@ -417,12 +417,12 @@ export const GameGrid: React.FC<GameGridProps> = ({
               id="viewAllGamesBtn"
               className={`btn btn-sm ${
                 selectedFilter === "all"
-                  ? "btn-warning text-dark fw-bold shadow-sm"
-                  : "btn-outline-warning text-warning"
-              } rounded-pill px-3 d-inline-flex align-items-center gap-1`}
+                  ? "btn-theme-orange-solid"
+                  : "btn-theme-orange-outline"
+              } rounded-pill px-3 py-1 fw-bold d-inline-flex align-items-center gap-2`}
               onClick={() => scrollToCatalog("all")}
             >
-              <i className="fa-solid fa-grid-2"></i> All Games ({totalGames || catalogGames.length})
+              <i className="fa-solid fa-layer-group"></i> All Games ({totalGames || catalogGames.length})
             </button>
           </div>
         </div>
@@ -442,11 +442,11 @@ export const GameGrid: React.FC<GameGridProps> = ({
                 }}
               >
                 {tab.id === "all" ? (
-                  <i className="fa-solid fa-layer-group text-warning"></i>
+                  <i className="fa-solid fa-layer-group text-white" style={{ color: "#ffffff" }}></i>
                 ) : tab.id === "spribe" ? (
                   <i className="fa-solid fa-gamepad" style={{ color: selectedFilter === "spribe" ? "#ffffff" : "#00e5ff" }}></i>
                 ) : (
-                  <i className="fa-solid fa-network-wired" style={{ color: selectedFilter === "provider" ? "#ffffff" : "#c084fc" }}></i>
+                  <i className="fa-solid fa-network-wired" style={{ color: selectedFilter === "provider" ? "#ffffff" : "#FF9B42" }}></i>
                 )}
                 <span>{tab.label}</span>
                 {tab.isHot && (
@@ -525,8 +525,8 @@ export const GameGrid: React.FC<GameGridProps> = ({
                   className="p-4 rounded-4 text-center d-flex flex-column align-items-center justify-content-center"
                   style={{
                     height: "250px",
-                    background: "rgba(13, 5, 29, 0.7)",
-                    border: "1px solid rgba(147, 51, 234, 0.25)",
+                    background: "rgba(18, 12, 8, 0.7)",
+                    border: "1px solid rgba(245, 131, 31, 0.25)",
                     animation: "pulse 1.5s infinite ease-in-out",
                   }}
                 >
@@ -549,7 +549,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
 
         {/* View More Games Pagination Loader Section (Left-Right Layout) */}
         {!isLoading && filteredGames.length > 0 && (
-          <div className="d-flex flex-column flex-md-row align-items-center justify-content-between mt-4 pt-3 pb-2 border-top border-purple-subtle gap-3 px-2">
+          <div className="d-flex flex-column flex-md-row align-items-center justify-content-between mt-4 pt-3 pb-2 border-top border-warning border-opacity-25 gap-3 px-2">
             {hasMore ? (
               <>
                 {/* Left Side: Game Count & Progress Bar */}
@@ -575,7 +575,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
                       }}
                     ></div>
                   </div>
-                  <span className="badge bg-dark text-warning border border-warning border-opacity-25 rounded-pill px-2 py-1 small">
+                  <span className="badge bg-dark border rounded-pill px-2 py-1 small" style={{ color: "#FF9431", borderColor: "rgba(245, 131, 31, 0.4)" }}>
                     {Math.min(100, Math.round((catalogGames.length / (totalGames || 1)) * 100))}%
                   </span>
                 </div>
@@ -585,7 +585,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
                   <button
                     id="viewMoreGamesBtn"
                     type="button"
-                    className="btn btn-warning text-dark fw-bold rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2 shadow-sm transition-all"
+                    className="btn btn-theme-orange-solid rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2"
                     onClick={handleLoadMore}
                     disabled={isLoadingMore}
                   >
@@ -606,12 +606,12 @@ export const GameGrid: React.FC<GameGridProps> = ({
             ) : (
               <>
                 <div className="text-secondary small">
-                  Showing all <strong className="text-warning">{totalGames || catalogGames.length}</strong> games
+                  Showing all <strong style={{ color: "#FF9431" }}>{totalGames || catalogGames.length}</strong> games
                 </div>
                 <div className="d-flex align-items-center gap-2 text-secondary small py-2 px-3 rounded-pill bg-dark border border-secondary border-opacity-25">
                   <i className="fa-solid fa-circle-check text-success"></i>
                   <span>
-                    All <strong className="text-warning">{totalGames || catalogGames.length}</strong> Live Games Loaded
+                    All <strong style={{ color: "#FF9431" }}>{totalGames || catalogGames.length}</strong> Live Games Loaded
                   </span>
                 </div>
               </>
@@ -622,7 +622,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
         {/* Empty State */}
         {!isLoading && filteredGames.length === 0 && (
           <div id="noGamesFoundState" className="text-center py-5">
-            <div className="mb-3" style={{ fontSize: "3rem", color: "#a855f7" }}>
+            <div className="mb-3" style={{ fontSize: "3rem", color: "#F5831F" }}>
               <i className="fa-solid fa-gamepad"></i>
             </div>
             <h3 className="fw-bold text-light mb-2">No Live Games Found</h3>
@@ -658,15 +658,15 @@ export const GameGrid: React.FC<GameGridProps> = ({
           <section id="featuredSection" className="mb-5 showcase-block-panel">
             <div className="section-header-bar" id="featuredHeader">
               <h2 className="section-header-title">
-                <i className="fa-solid fa-crown text-warning"></i> Featured Live Provider Picks
+                <i className="fa-solid fa-crown" style={{ color: "#FF9431" }}></i> Featured Live Provider Picks
               </h2>
               <div className="d-flex align-items-center gap-2">
                 <button
                   type="button"
-                  className="btn btn-sm btn-outline-warning rounded-pill px-3 d-none d-sm-inline-flex align-items-center gap-1"
+                  className="btn btn-sm btn-catalog-pill rounded-pill px-3 d-none d-sm-inline-flex align-items-center gap-2"
                   onClick={() => scrollToCatalog("all")}
                 >
-                  <i className="fa-solid fa-layer-group"></i> View In Catalog
+                  <i className="fa-solid fa-layer-group" style={{ color: "#FF9431" }}></i> View In Catalog
                 </button>
                 <button
                   type="button"

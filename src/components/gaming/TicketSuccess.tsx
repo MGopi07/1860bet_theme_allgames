@@ -51,7 +51,7 @@ export const TicketSuccess: React.FC<TicketSuccessProps> = ({
         <div
           className="printed-ticket-voucher p-3 rounded mb-3 text-start position-relative overflow-hidden"
           style={{
-            background: "radial-gradient(circle at 50% 0%, #1c0b38 0%, #0c031c 100%)",
+            background: "radial-gradient(circle at 50% 0%, #26160B 0%, #0F0A06 100%)",
             border: "1.5px solid rgba(245, 179, 0, 0.4)",
             boxShadow: "0 8px 30px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(245, 179, 0, 0.1)",
           }}
@@ -65,7 +65,7 @@ export const TicketSuccess: React.FC<TicketSuccessProps> = ({
               <span className="fw-bold text-white" style={{ letterSpacing: "1px" }}>
                 BET
               </span>
-              <span className="badge ms-1 bg-dark text-warning border border-warning-subtle" style={{ fontSize: "0.62rem" }}>
+              <span className="badge ms-1 border" style={{ fontSize: "0.62rem", background: "rgba(245, 131, 31, 0.15)", borderColor: "rgba(245, 131, 31, 0.5)", color: "#FF9431" }}>
                 CASHOUT VOUCHER
               </span>
             </div>
@@ -193,7 +193,7 @@ export const TicketSuccess: React.FC<TicketSuccessProps> = ({
             <i className="fa-solid fa-scale-balanced"></i>
           </div>
           <div className="brand-text-block text-start">
-            <span className="brand-title">Betwise Central</span>
+            <span className="brand-title">1860BET Central</span>
             <span className="brand-sub">Independent. Fair. Reliable. Windhoek Central.</span>
           </div>
         </div>

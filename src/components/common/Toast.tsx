@@ -25,9 +25,9 @@ export const Toast: React.FC<ToastProps> = ({
   if (!isOpen || !message) return null;
 
   const lower = message.toLowerCase();
-  let icon = "fa-solid fa-bell text-info";
-  let borderColor = "rgba(168, 85, 247, 0.6)";
-  let glowColor = "rgba(168, 85, 247, 0.35)";
+  let icon = "fa-solid fa-bell text-warning";
+  let borderColor = "rgba(245, 131, 31, 0.6)";
+  let glowColor = "rgba(245, 131, 31, 0.35)";
 
   if (
     lower.includes("approved") ||
@@ -67,7 +67,7 @@ export const Toast: React.FC<ToastProps> = ({
         bottom: "30px",
         right: "30px",
         zIndex: 99999,
-        background: "linear-gradient(135deg, #180838 0%, #0d021f 100%)",
+        background: "linear-gradient(135deg, #241408 0%, #110A05 100%)",
         border: `1.5px solid ${borderColor}`,
         boxShadow: `0 8px 30px rgba(0, 0, 0, 0.7), 0 0 20px ${glowColor}`,
         borderRadius: "14px",

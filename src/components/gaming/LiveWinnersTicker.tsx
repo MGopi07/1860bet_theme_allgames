@@ -137,10 +137,19 @@ export const LiveWinnersTicker: React.FC = React.memo(() => {
         <div className="d-flex align-items-center gap-2">
           <span className="live-pulse-dot"></span>
           <span className="live-ticker-header-title">
-            <i className="fa-solid fa-bolt text-warning me-1"></i>
+            <i className="fa-solid fa-bolt me-1" style={{ color: "#FF9431" }}></i>
             LIVE RECENT WINNERS FEED
           </span>
-          <span className="badge bg-warning text-dark fw-bold rounded-pill px-2 py-1 ms-1" style={{ fontSize: "0.65rem" }}>
+          <span
+            className="badge fw-bold rounded-pill px-2 py-1 ms-1"
+            style={{
+              fontSize: "0.65rem",
+              background: "linear-gradient(135deg, #FF9431 0%, #F5831F 100%)",
+              color: "#ffffff",
+              border: "1px solid #FFAE66",
+              boxShadow: "0 0 10px rgba(245, 131, 31, 0.5)",
+            }}
+          >
             REAL TIME
           </span>
         </div>
@@ -154,7 +163,7 @@ export const LiveWinnersTicker: React.FC = React.memo(() => {
           <button
             type="button"
             className="btn btn-sm btn-outline-secondary text-light rounded-circle p-0 d-flex align-items-center justify-content-center"
-            style={{ width: "26px", height: "26px", borderColor: "rgba(139, 92, 246, 0.4)" }}
+            style={{ width: "26px", height: "26px", borderColor: "rgba(245, 131, 31, 0.4)" }}
             onClick={() => handleScroll("left")}
             aria-label="Scroll left"
           >
@@ -163,7 +172,7 @@ export const LiveWinnersTicker: React.FC = React.memo(() => {
           <button
             type="button"
             className="btn btn-sm btn-outline-secondary text-light rounded-circle p-0 d-flex align-items-center justify-content-center"
-            style={{ width: "26px", height: "26px", borderColor: "rgba(139, 92, 246, 0.4)" }}
+            style={{ width: "26px", height: "26px", borderColor: "rgba(245, 131, 31, 0.4)" }}
             onClick={() => handleScroll("right")}
             aria-label="Scroll right"
           >

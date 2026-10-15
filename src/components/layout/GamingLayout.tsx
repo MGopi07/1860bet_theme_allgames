@@ -87,7 +87,7 @@ export const GamingLayout: React.FC<GamingLayoutProps> = ({
                     ? "btn-warning text-dark fw-bold"
                     : "btn-outline-secondary text-light"
                 }`}
-                style={{ borderColor: "#59259c" }}
+                style={{ borderColor: "#6E3917" }}
                 onClick={() => setDefaultBet(val)}
               >
                 N$ {val}
@@ -98,7 +98,7 @@ export const GamingLayout: React.FC<GamingLayoutProps> = ({
           {/* Right: Dock Action Button & Admin Unlock Indicator */}
           <div className="d-flex align-items-center gap-2">
             {isOverrideUnlocked && (
-              <span className="badge bg-warning text-dark border border-warning px-3 py-2 fw-bold d-inline-flex align-items-center gap-1 shadow-sm">
+              <span className="badge border px-3 py-2 fw-bold d-inline-flex align-items-center gap-1 shadow-sm" style={{ background: "linear-gradient(135deg, #FF9431 0%, #F5831F 100%)", color: "#ffffff", borderColor: "#FFAE66" }}>
                 <i className="fa-solid fa-lock-open"></i> KEYBOARD UNLOCKED (CTRL+SHIFT+D)
               </span>
             )}
@@ -108,7 +108,7 @@ export const GamingLayout: React.FC<GamingLayoutProps> = ({
               onClick={onPrimaryAction}
               style={{ fontSize: "0.95rem" }}
             >
-              <i className="fa-solid fa-circle-check me-1"></i>
+              <i className={machineType === "terminal" ? "fa-solid fa-print me-1" : "fa-solid fa-money-bill-transfer me-1"}></i>
               <span id="dockActionText">{actionText}</span>
             </button>
           </div>
@@ -122,16 +122,27 @@ export const GamingLayout: React.FC<GamingLayoutProps> = ({
             <div className="row g-4 justify-content-between">
               <div className="col-12 col-md-4">
                 <div className="d-flex align-items-center gap-2 mb-2">
-                  <span className="brand-name fs-5">
-                    <span style={{ color: "#f5b300" }}>BET</span>
-                    <span style={{ color: "#ffffff" }}>WISE</span>
-                  </span>
-                  <span className="badge bg-dark border border-warning-subtle text-warning" style={{ fontSize: "0.7rem" }}>
+                  <img
+                    src="/assets/images/logo.png"
+                    alt="1860BET"
+                    style={{ height: "32px", objectFit: "contain" }}
+                  />
+                  <span
+                    className="badge border"
+                    style={{
+                      fontSize: "0.7rem",
+                      background: "rgba(245, 131, 31, 0.15)",
+                      borderColor: "rgba(245, 131, 31, 0.5)",
+                      color: "#FF9431",
+                      letterSpacing: "0.5px",
+                      fontWeight: 700,
+                    }}
+                  >
                     OFFICIAL MACHINE
                   </span>
                 </div>
                 <p className="text-dim small mb-3">
-                  Authorized Gaming Smart PC System. Powered by Betwise Gaming Central.
+                  Authorized Gaming Smart PC System. Powered by 1860BET Gaming Central.
                 </p>
                 <div className="security-badge-row">
                   <span className="ssl-badge">

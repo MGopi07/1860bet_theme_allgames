@@ -28,7 +28,7 @@ export const CashOutModal: React.FC<CashOutModalProps> = ({
         <div
           className="inner-cashout-panel p-3 rounded mb-3"
           style={{
-            background: "radial-gradient(circle at 50% 0%, #200c40 0%, #0d031c 100%)",
+            background: "radial-gradient(circle at 50% 0%, #26160B 0%, #0F0A06 100%)",
             border: "1.5px solid rgba(245, 179, 0, 0.4)",
             boxShadow: "0 8px 25px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(245, 179, 0, 0.1)",
           }}

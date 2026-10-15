@@ -62,7 +62,7 @@ export const ValidationModals: React.FC<ValidationModalProps> = ({
                   justifyContent: "center",
                   color: "#ffffff",
                   fontSize: "2.2rem",
-                  animation: "pulse3DGlow 2.5s infinite alternate ease-in-out"
+                  animation: "pulse3DRedGlow 2.5s infinite alternate ease-in-out"
                 }}
               >
                 <i className="fa-solid fa-vault"></i>
@@ -477,7 +477,7 @@ export const ValidationModals: React.FC<ValidationModalProps> = ({
             <div
               className="p-3 mb-3 rounded-4 border text-center position-relative overflow-hidden"
               style={{
-                background: "radial-gradient(circle at 50% 0%, #1e0d3d 0%, #0e041f 100%)",
+                background: "radial-gradient(circle at 50% 0%, #26160B 0%, #0F0A06 100%)",
                 borderColor: "rgba(245, 179, 0, 0.45)",
                 boxShadow: "0 8px 25px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(245, 179, 0, 0.1)",
               }}
@@ -623,55 +623,57 @@ export const ValidationModals: React.FC<ValidationModalProps> = ({
             ========================================================================= */}
         {alertType === "STATION_UNBOUND" && (
           <div className="py-2">
-            {/* Glowing 3D Emerald Lock Emblem */}
+            {/* Glowing 3D 1860BET Brand Orange Lock Emblem */}
             <div className="d-flex justify-content-center mb-3">
               <div
                 style={{
-                  width: "88px",
-                  height: "88px",
+                  width: "92px",
+                  height: "92px",
                   borderRadius: "50%",
-                  background: "radial-gradient(circle at 35% 25%, #34d399 0%, #059669 55%, #064e3b 100%)",
-                  border: "2.5px solid #a7f3d0",
-                  boxShadow: "0 0 35px rgba(16, 185, 129, 0.8), inset 0 2px 6px rgba(255, 255, 255, 0.8), inset 0 -2px 6px rgba(0, 0, 0, 0.5)",
+                  background: "radial-gradient(circle at 35% 25%, #FFA754 0%, #F5831F 48%, #C45B00 80%, #7A3300 100%)",
+                  border: "2.5px solid #FDF3E3",
+                  boxShadow: "0 0 35px rgba(245, 131, 31, 0.85), inset 0 2px 6px rgba(255, 255, 255, 0.85), inset 0 -2px 6px rgba(0, 0, 0, 0.5)",
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   color: "#ffffff",
-                  fontSize: "2.4rem",
-                  animation: "pulse3DGlow 2.5s infinite alternate ease-in-out",
+                  fontSize: "2.5rem",
+                  animation: "pulse3DOrangeGlow 2.5s infinite alternate ease-in-out",
                 }}
               >
                 <i className="fa-solid fa-lock" style={{ filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))" }}></i>
               </div>
             </div>
 
-            {/* Emerald Gradient Heading */}
+            {/* 1860BET Orange & Cream Gradient Heading */}
             <h3
               className="mb-2"
               style={{
-                background: "linear-gradient(180deg, #ffffff 0%, #a7f3d0 45%, #34d399 100%)",
+                background: "linear-gradient(180deg, #FFFFFF 0%, #FDF3E3 40%, #F5831F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                fontSize: "1.65rem",
+                fontSize: "1.75rem",
                 fontWeight: 800,
                 letterSpacing: "0.5px",
-                filter: "drop-shadow(0 0 14px rgba(16, 185, 129, 0.6))",
+                filter: "drop-shadow(0 0 16px rgba(245, 131, 31, 0.65))",
               }}
             >
               PC Not Authorized
             </h3>
 
             {/* Single clean line */}
-            <p className="small mb-3 px-2 text-center" style={{ color: "#cbd5e1", fontSize: "0.88rem", lineHeight: "1.4" }}>
+            <p className="small mb-3 px-2 text-center" style={{ color: "#E2D7CC", fontSize: "0.92rem", lineHeight: "1.45" }}>
               Please contact the shop cashier to authorize this Machine.
             </p>
 
             {/* Subtle Setup Token Recovery Option */}
-            <div className="mt-2 text-center d-flex align-items-center justify-content-center gap-2">
+            <div className="mt-3 text-center d-flex align-items-center justify-content-center gap-2">
               <button
                 type="button"
-                className="btn btn-link text-secondary btn-sm p-0 text-decoration-none"
-                style={{ fontSize: "0.74rem", opacity: 0.85 }}
+                className="btn btn-link btn-sm p-0 text-decoration-none d-inline-flex align-items-center gap-1"
+                style={{ fontSize: "0.78rem", color: "#C8B8A6", transition: "color 0.2s ease" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#F5831F")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#C8B8A6")}
                 onClick={() => {
                   if (onRegisterNewToken) {
                     onRegisterNewToken();
@@ -684,9 +686,13 @@ export const ValidationModals: React.FC<ValidationModalProps> = ({
                   }
                 }}
               >
-                <i className="fa-solid fa-key me-1" style={{ color: "#34d399" }}></i> Register New Token
+                <i className="fa-solid fa-key" style={{ color: "#F5831F" }}></i>
+                <span>Register New Token</span>
               </button>
-              <span className="badge bg-dark border border-secondary text-secondary font-monospace px-1 py-0" style={{ fontSize: "0.68rem" }}>
+              <span
+                className="badge bg-dark border font-monospace px-2 py-0"
+                style={{ fontSize: "0.7rem", borderColor: "rgba(245, 131, 31, 0.45)", color: "#FDF3E3" }}
+              >
                 Ctrl+Shift+R
               </span>
             </div>

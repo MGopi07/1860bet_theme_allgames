@@ -35,9 +35,9 @@ export const VipPromotionsSection: React.FC<VipPromotionsSectionProps> = React.m
     {
       id: "cashout-desk",
       icon: "fa-solid fa-money-bill-wave",
-      iconColor: "#a855f7",
+      iconColor: "#F5831F",
       tag: "FAST PAYOUT",
-      tagClass: "bg-purple text-light",
+      tagClass: "bg-warning text-dark",
       title: "Instant Desk Cashout",
       desc: "Click Cash Out at any time. Your session balance is locked and instantly paid in cash at the counter.",
       actionText: "REQUEST CASHOUT",

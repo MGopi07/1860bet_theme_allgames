@@ -395,12 +395,13 @@ export const GamePlayPage: React.FC = () => {
             <Link
               to="/smart-pc"
               className="d-flex align-items-center gap-2 text-decoration-none me-1"
-              title="Betwise Station"
+              title="1860BET Station"
             >
-              <span className="brand-name">
-                <span style={{ color: "#f5b300" }}>BET</span>
-                <span style={{ color: "#ffffff" }}>WISE</span>
-              </span>
+              <img
+                src="/assets/images/logo.png"
+                alt="1860BET"
+                style={{ maxHeight: "38px", objectFit: "contain" }}
+              />
             </Link>
 
             {/* Dedicated Station Badge */}
@@ -410,17 +411,17 @@ export const GamePlayPage: React.FC = () => {
                 className="badge border text-light px-2 py-1 d-inline-flex align-items-center gap-1"
                 style={{
                   fontSize: "0.74rem",
-                  background: "rgba(94, 23, 187, 0.4)",
-                  borderColor: "rgba(168, 85, 247, 0.5)",
+                  background: "rgba(245, 131, 31, 0.22)",
+                  borderColor: "rgba(245, 131, 31, 0.5)",
                 }}
               >
-                <i className="fa-solid fa-desktop text-warning"></i> SMART PC
+                <i className="fa-solid fa-desktop" style={{ color: "#FF9431" }}></i> SMART PC
               </span>
               <span id="stationCodeDisplay" className="fw-bold text-light">
                 {machine.name || "Smart PC-03"}
               </span>
               <span className="text-secondary">|</span>
-              <span className="text-warning-subtle" id="stationShopDisplay" style={{ fontSize: "0.76rem" }}>
+              <span id="stationShopDisplay" style={{ fontSize: "0.76rem", color: "#FDF3E3" }}>
                 {machine.shopName}
               </span>
             </div>
@@ -436,7 +437,7 @@ export const GamePlayPage: React.FC = () => {
           {/* Right: Live Balance + Cash Out + Controls */}
           <div className="d-flex align-items-center gap-2 gap-sm-3">
             {isOverrideUnlocked && (
-              <span className="badge bg-warning text-dark border border-warning px-2 px-md-3 py-2 fw-bold d-inline-flex align-items-center gap-1 shadow-sm" style={{ fontSize: "0.78rem" }}>
+              <span className="badge border px-2 px-md-3 py-2 fw-bold d-inline-flex align-items-center gap-1 shadow-sm" style={{ fontSize: "0.78rem", background: "linear-gradient(135deg, #FF9431 0%, #F5831F 100%)", color: "#ffffff", borderColor: "#FFAE66" }}>
                 <i className="fa-solid fa-lock-open"></i> KEYBOARD UNLOCKED (CTRL+SHIFT+D)
               </span>
             )}
@@ -503,14 +504,14 @@ export const GamePlayPage: React.FC = () => {
             ) : gameUrl && gameUrl.startsWith("http") && !gameUrl.includes("/smart-pc") && !gameUrl.includes(window.location.host) && !gameUrl.includes("staging.game-server.winbet.com") ? (
               <iframe
                 src={gameUrl}
-                title={game?.title || "Betwise Game Stream"}
+                title={game?.title || "1860BET Game Stream"}
                 className="w-100 flex-grow-1 border-0"
-                style={{ height: "calc(100vh - 75px)", minHeight: "560px", background: "#05010e" }}
+                style={{ height: "calc(100vh - 75px)", minHeight: "560px", background: "#0C0805" }}
                 allow="autoplay; fullscreen; clipboard-write"
               />
             ) : (
               <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1 p-4 text-center">
-                <div className="card bg-dark border-purple-800 p-4 rounded-4 shadow-lg text-center" style={{ maxWidth: "560px" }}>
+                <div className="card bg-dark border-warning border-opacity-25 p-4 rounded-4 shadow-lg text-center" style={{ maxWidth: "560px" }}>
                   <img
                     src={game?.image || "/assets/games/SPRIBE/AVIATOR.png"}
                     alt={game?.title}
@@ -521,7 +522,7 @@ export const GamePlayPage: React.FC = () => {
                     }}
                   />
                   <h3 className="text-warning fw-bold text-uppercase mb-1">{game?.title}</h3>
-                  <span className="badge bg-purple-900 border border-purple-600 text-purple-200 mb-3 align-self-center px-3 py-1">
+                  <span className="badge bg-dark border border-warning text-warning mb-3 align-self-center px-3 py-1">
                     {game?.provider || "Slotegrator / Live Casino"}
                   </span>
                   <p className="text-secondary small mb-4">
@@ -553,11 +554,11 @@ export const GamePlayPage: React.FC = () => {
           /* Fast Bet Interactive Arcade Stage (PDF 4.7) */
           <div className="container py-4 flex-grow-1 d-flex flex-column justify-content-center" style={{ maxWidth: "700px" }}>
             <div
-              className="card p-4 rounded-4 shadow-lg border-purple-800 text-center"
+              className="card p-4 rounded-4 shadow-lg text-center"
               style={{
-                background: "radial-gradient(circle at 50% 20%, #1d0938 0%, #090217 100%)",
-                border: "2px solid #7c3aed",
-                boxShadow: "0 0 35px rgba(124, 58, 237, 0.35)",
+                background: "radial-gradient(circle at 50% 20%, #1c130b 0%, #0c0805 100%)",
+                border: "2px solid #F5831F",
+                boxShadow: "0 0 35px rgba(245, 131, 31, 0.35)",
               }}
             >
               {/* Game Avatar & Title */}
@@ -572,7 +573,7 @@ export const GamePlayPage: React.FC = () => {
                   }}
                 />
                 <h3 className="fw-bold text-warning mt-2 mb-1 text-uppercase">{game?.title}</h3>
-                <span className="badge bg-purple-900 border border-purple-600 text-purple-200">
+                <span className="badge border" style={{ background: "rgba(245, 131, 31, 0.2)", borderColor: "rgba(245, 131, 31, 0.5)", color: "#FF9431" }}>
                   <i className="fa-solid fa-bolt text-warning me-1"></i> FAST BET SMART PC ENGINE
                 </span>
               </div>
@@ -582,9 +583,9 @@ export const GamePlayPage: React.FC = () => {
                 <div
                   className="reels-container p-4 mb-4 rounded-4 position-relative overflow-hidden"
                   style={{
-                    background: "radial-gradient(circle at 50% 50%, #15052e 0%, #06010f 100%)",
-                    border: "2.5px solid #9333ea",
-                    boxShadow: "0 0 30px rgba(147, 51, 234, 0.4), inset 0 15px 30px rgba(0,0,0,0.9)",
+                    background: "radial-gradient(circle at 50% 50%, #1f140b 0%, #0a0704 100%)",
+                    border: "2.5px solid #FF9B42",
+                    boxShadow: "0 0 30px rgba(245, 131, 31, 0.4), inset 0 15px 30px rgba(0,0,0,0.9)",
                   }}
                 >
                   <div className="d-flex justify-content-center gap-3">
@@ -612,7 +613,7 @@ export const GamePlayPage: React.FC = () => {
                   </div>
                 </div>
               ) : (
-                <div className="p-3 mb-3 rounded-4" style={{ background: "rgba(0,0,0,0.4)", border: "1px solid rgba(147, 51, 234, 0.3)" }}>
+                <div className="p-3 mb-3 rounded-4" style={{ background: "rgba(0,0,0,0.4)", border: "1px solid rgba(245, 131, 31, 0.35)" }}>
                   <span className="text-secondary small fw-bold text-uppercase d-block mb-2">Select Your Prediction</span>
                   <div className="d-flex flex-wrap justify-content-center gap-2">
                     {choices.map((c) => (
@@ -650,14 +651,14 @@ export const GamePlayPage: React.FC = () => {
               {/* Stake Controller */}
               <div
                 className="d-flex align-items-center justify-content-between p-3 rounded-4 mb-3"
-                style={{ background: "rgba(0, 0, 0, 0.5)", border: "1px solid rgba(147, 51, 234, 0.4)" }}
+                style={{ background: "rgba(0, 0, 0, 0.5)", border: "1px solid rgba(245, 131, 31, 0.4)" }}
               >
                 <span className="text-secondary small fw-bold text-uppercase ms-2">Bet Amount</span>
                 <div className="d-flex align-items-center gap-3">
                   <button
                     type="button"
                     className="btn btn-sm text-light rounded-circle d-flex align-items-center justify-content-center"
-                    style={{ width: "36px", height: "36px", background: "rgba(147, 51, 234, 0.4)", border: "1px solid #a855f7" }}
+                    style={{ width: "36px", height: "36px", background: "rgba(245, 131, 31, 0.25)", border: "1px solid #F5831F" }}
                     onClick={() => setStake((prev) => Math.max(10, prev - 10))}
                     disabled={isPlayingRound}
                   >
@@ -669,7 +670,7 @@ export const GamePlayPage: React.FC = () => {
                   <button
                     type="button"
                     className="btn btn-sm text-light rounded-circle d-flex align-items-center justify-content-center"
-                    style={{ width: "36px", height: "36px", background: "rgba(147, 51, 234, 0.4)", border: "1px solid #a855f7" }}
+                    style={{ width: "36px", height: "36px", background: "rgba(245, 131, 31, 0.25)", border: "1px solid #F5831F" }}
                     onClick={() => setStake((prev) => Math.min(500, prev + 10))}
                     disabled={isPlayingRound}
                   >
@@ -721,7 +722,7 @@ export const GamePlayPage: React.FC = () => {
             style={{
               maxWidth: "520px",
               width: "100%",
-              background: "radial-gradient(circle at 50% 0%, #20083d 0%, #0c0218 100%)",
+              background: "radial-gradient(circle at 50% 0%, #26160B 0%, #0F0A06 100%)",
               border: "1.5px solid rgba(239, 68, 68, 0.6)",
               boxShadow: "0 0 45px rgba(239, 68, 68, 0.35)",
             }}

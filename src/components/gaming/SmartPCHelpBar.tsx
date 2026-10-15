@@ -15,14 +15,14 @@ export const SmartPCHelpBar: React.FC<SmartPCHelpBarProps> = React.memo(({
         <div className="col-12 col-lg-8">
           <div className="d-flex align-items-center gap-3">
             <div className="help-icon-glow">
-              <i className="fa-solid fa-headset text-warning fs-3"></i>
+              <i className="fa-solid fa-headset fs-3" style={{ color: "#FF9431" }}></i>
             </div>
             <div>
               <h4 className="text-light fw-bold mb-1" style={{ fontSize: "1.1rem" }}>
                 Need Help or Cash Balance Top-Up?
               </h4>
               <p className="text-secondary small mb-0" style={{ lineHeight: "1.4" }}>
-                Approach the {shopName} Cashier Counter with your Smart PC Machine Number (<strong className="text-warning">{machineName}</strong>) for instant deposit, session top-up, or cashout assistance.
+                Approach the {shopName} Cashier Counter with your Smart PC Machine Number (<strong style={{ color: "#FF9431" }}>{machineName}</strong>) for instant deposit, session top-up, or cashout assistance.
               </p>
             </div>
           </div>
@@ -35,7 +35,7 @@ export const SmartPCHelpBar: React.FC<SmartPCHelpBarProps> = React.memo(({
               <span>CERTIFIED FAIR RNG</span>
             </div>
             <div className="trust-pill">
-              <i className="fa-solid fa-bolt text-warning"></i>
+              <i className="fa-solid fa-bolt" style={{ color: "#FF9431" }}></i>
               <span>INSTANT PAYOUTS</span>
             </div>
             <div className="trust-pill">

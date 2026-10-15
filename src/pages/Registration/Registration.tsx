@@ -98,7 +98,7 @@ export const Registration: React.FC<RegistrationProps> = ({
   const hasExistingMachine = Boolean(localStorage.getItem("winbet_machine_id"));
 
   return (
-    <div className="d-flex flex-column min-vh-100" style={{ background: "radial-gradient(circle at 50% 15%, #1d0938 0%, #080214 100%)" }}>
+    <div className="d-flex flex-column min-vh-100" style={{ background: "radial-gradient(circle at 50% 15%, #1c130b 0%, #090705 100%)" }}>
       <div className="container-fluid px-lg-5 py-3 d-flex flex-column flex-grow-1">
         {/* Center Content Wrapper */}
         <div className="my-auto w-100 py-2">
@@ -112,6 +112,15 @@ export const Registration: React.FC<RegistrationProps> = ({
                 }}
               >
                 <div>
+                  {/* 1860BET Brand Logo Header */}
+                  <div className="text-center mb-3">
+                    <img
+                      src="/assets/images/logo.png"
+                      alt="1860BET"
+                      style={{ maxHeight: "48px", maxWidth: "200px", objectFit: "contain", filter: "drop-shadow(0 2px 12px rgba(245, 131, 31, 0.45))" }}
+                    />
+                  </div>
+
                   {wizardStep === 1 ? (
                     /* SCREEN 1: REGISTRATION SETUP */
                     <form id="flowScreen1" onSubmit={handleSubmit} className="text-start">
@@ -173,38 +182,75 @@ export const Registration: React.FC<RegistrationProps> = ({
                       {/* Error Alert Box */}
                       {errorMessage && (
                         <div
-                          className="alert alert-danger py-2 px-3 mb-3 small text-light bg-danger bg-opacity-25 border-danger rounded-3"
-                          style={{ fontSize: "0.82rem" }}
+                          className="p-3 mb-3 text-light rounded-4 position-relative"
+                          style={{
+                            background: "linear-gradient(135deg, rgba(38, 14, 12, 0.92) 0%, rgba(22, 9, 8, 0.96) 100%)",
+                            border: "1.5px solid rgba(239, 68, 68, 0.55)",
+                            boxShadow: "0 6px 20px rgba(0, 0, 0, 0.6), 0 0 16px rgba(239, 68, 68, 0.18)",
+                            fontSize: "0.84rem",
+                          }}
                         >
-                          <div className="d-flex align-items-start gap-2">
-                            <i className="fa-solid fa-triangle-exclamation text-danger fs-5 mt-1"></i>
+                          <div className="d-flex align-items-start gap-3">
+                            <div
+                              className="d-flex align-items-center justify-content-center rounded-circle flex-shrink-0 mt-1"
+                              style={{
+                                width: "34px",
+                                height: "34px",
+                                background: "rgba(239, 68, 68, 0.18)",
+                                border: "1px solid rgba(239, 68, 68, 0.45)",
+                                color: "#f87171",
+                                fontSize: "1.05rem",
+                              }}
+                            >
+                              <i className="fa-solid fa-triangle-exclamation"></i>
+                            </div>
                             <div className="w-100">
-                              <strong>Registration Error:</strong>
-                              <div className="mb-2">{errorMessage}</div>
+                              <div className="fw-bold mb-1" style={{ color: "#fca5a5", fontSize: "0.88rem" }}>
+                                Registration Error:
+                              </div>
+                              <div className="mb-2" style={{ color: "#FDF3E3", lineHeight: 1.45 }}>
+                                {errorMessage}
+                              </div>
 
                               {/* Helpful action buttons when PC is already registered */}
                               {errorMessage.toLowerCase().includes("already registered") && (
-                                <div className="mt-2 pt-2 border-top border-danger border-opacity-25 d-flex flex-column gap-2">
+                                <div className="mt-2 pt-2 border-top d-flex flex-column gap-2" style={{ borderColor: "rgba(239, 68, 68, 0.25)" }}>
                                   <button
                                     type="button"
-                                    className="btn btn-sm btn-warning text-dark fw-bold w-100 py-1"
-                                    style={{ borderRadius: "6px" }}
+                                    className="btn w-100 py-2 d-flex align-items-center justify-content-center gap-2"
+                                    style={{
+                                      borderRadius: "10px",
+                                      background: "linear-gradient(180deg, #FF9431 0%, #D96A06 100%)",
+                                      border: "1px solid #FFAE66",
+                                      color: "#ffffff",
+                                      fontWeight: 700,
+                                      fontSize: "0.85rem",
+                                      boxShadow: "0 2px 0 #662E00, 0 4px 10px rgba(0, 0, 0, 0.4)",
+                                      transition: "all 0.18s ease",
+                                    }}
                                     onClick={handleResetFingerprintAndRetry}
                                     disabled={isLoading}
                                   >
-                                    <i className="fa-solid fa-arrows-rotate me-1"></i>
-                                    Reset Device ID & Register Now
+                                    <i className="fa-solid fa-arrows-rotate"></i>
+                                    <span>Reset Device ID & Register Now</span>
                                   </button>
 
                                   {hasExistingMachine && (
                                     <button
                                       type="button"
-                                      className="btn btn-sm btn-outline-light w-100 py-1"
-                                      style={{ borderRadius: "6px" }}
+                                      className="btn w-100 py-2 d-flex align-items-center justify-content-center gap-2"
+                                      style={{
+                                        borderRadius: "10px",
+                                        background: "rgba(255, 255, 255, 0.05)",
+                                        border: "1px solid rgba(255, 255, 255, 0.2)",
+                                        color: "#FDF3E3",
+                                        fontWeight: 600,
+                                        fontSize: "0.82rem",
+                                      }}
                                       onClick={() => navigate(machineType === "terminal" ? "/terminal" : "/smart-pc")}
                                     >
-                                      <i className="fa-solid fa-desktop me-1"></i>
-                                      Continue to Smart PC Lobby
+                                      <i className="fa-solid fa-desktop"></i>
+                                      <span>Continue to Smart PC Lobby</span>
                                     </button>
                                   )}
                                 </div>

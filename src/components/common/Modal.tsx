@@ -34,7 +34,7 @@ export const Modal: React.FC<ModalProps> = ({
     <div
       className="modal fade show d-block modal-theme-dark"
       tabIndex={-1}
-      style={{ backgroundColor: "rgba(3, 1, 8, 0.88)", backdropFilter: "blur(8px)" }}
+      style={{ backgroundColor: "rgba(8, 6, 4, 0.9)", backdropFilter: "blur(8px)" }}
       onClick={(e) => {
         if (!isLocked && e.target === e.currentTarget) onClose();
       }}
