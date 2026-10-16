@@ -43,8 +43,8 @@ export const RegistrationSuccess: React.FC = () => {
               />
             </Link>
             <span
-              className="badge ms-2 border" style={{ background: "rgba(245, 131, 31, 0.15)", borderColor: "rgba(245, 131, 31, 0.5)", color: "#FF9431" }}
-              style={{ fontSize: "0.75rem" }}
+              className="badge ms-2 border"
+              style={{ fontSize: "0.75rem", background: "rgba(245, 131, 31, 0.15)", borderColor: "rgba(245, 131, 31, 0.5)", color: "#FF9431" }}
             >
               REGISTRATION PORTAL
             </span>

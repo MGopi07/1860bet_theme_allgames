@@ -63,8 +63,8 @@ export const GamingHeader: React.FC<GamingHeaderProps> = ({
               </span>
             ) : (
               <span
-                className="badge border px-2 py-1 d-inline-flex align-items-center gap-1" style={{ fontSize: "0.74rem", background: "rgba(245, 131, 31, 0.15)", borderColor: "rgba(245, 131, 31, 0.4)", color: "#FF9431" }}
-                style={{ fontSize: "0.74rem" }}
+                className="badge border px-2 py-1 d-inline-flex align-items-center gap-1"
+                style={{ fontSize: "0.74rem", background: "rgba(245, 131, 31, 0.15)", borderColor: "rgba(245, 131, 31, 0.4)", color: "#FF9431" }}
               >
                 <i className="fa-solid fa-receipt"></i> TERMINAL
               </span>

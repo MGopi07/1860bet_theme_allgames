@@ -12,12 +12,14 @@
 body {
   background-color: var(--bg-deep);
   background-image:
-    radial-gradient(circle at 50% 0%, rgba(245, 131, 31, 0.35) 0%, transparent 60%),
-    radial-gradient(circle at 100% 100%, rgba(217, 106, 6, 0.25) 0%, transparent 50%),
-    radial-gradient(circle at 0% 100%, rgba(168, 78, 0, 0.35) 0%, transparent 40%),
-    linear-gradient(180deg, #0B0806 0%, #050403 100%);
+    linear-gradient(180deg, rgba(12, 8, 5, 0.80) 0%, rgba(20, 13, 8, 0.88) 40%, rgba(12, 8, 5, 0.96) 100%),
+    radial-gradient(circle at 50% 10%, rgba(245, 131, 31, 0.22) 0%, transparent 65%),
+    url('/assets/images/bg-1.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
   background-attachment: fixed;
-  color: #ffffff;
+  color: #FDF3E3;
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
   margin: 0;
@@ -28,10 +30,10 @@ body {
 /* Scoped Gaming Atmosphere Background for Game Page Only */
 body.game-lobby-body,
 .game-lobby-body {
-  background-color: #090705 !important;
+  background-color: #0C0805 !important;
   background-image:
-    linear-gradient(180deg, rgba(12, 8, 5, 0.78) 0%, rgba(16, 10, 6, 0.88) 40%, rgba(10, 7, 4, 0.95) 100%),
-    radial-gradient(circle at 50% 10%, rgba(245, 131, 31, 0.3) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(12, 8, 5, 0.78) 0%, rgba(20, 13, 8, 0.88) 40%, rgba(12, 8, 5, 0.96) 100%),
+    radial-gradient(circle at 50% 10%, rgba(245, 131, 31, 0.22) 0%, transparent 65%),
     url('/assets/images/bg-1.png') !important;
   background-repeat: no-repeat !important;
   background-position: center top !important;
